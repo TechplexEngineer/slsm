@@ -1,0 +1,99 @@
+/* Default Stylesheet */
+
+/** BODY ELEMENTS **/
+body {
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+    color: #333;
+    /*background-color: #eee;*/
+    background: #666666;
+}
+
+
+
+
+
+
+/** MAIN CONTAINERS **/
+div#container {
+    margin: 2em auto;
+
+}
+div#header {
+    color: inherit;
+    background-color: #E5E5E5;
+    border: 1px solid #8B8B8B;
+    border-width: 0 4px 4px 0;
+}
+div#header-in {
+    padding: 20px;
+}
+div#content-wrap {
+    padding: 10px 0;
+}
+div.content {
+    color: inherit;
+    background-color: #E5E5E5;
+    border: 1px solid #8B8B8B;
+    border-width: 0 4px 4px 0;
+}
+div.content-in {
+    padding: 20px;
+}
+div.column {
+    width: 175px;
+    color: inherit;
+    background-color: #E5E5E5;
+    border: 1px solid #8B8B8B;
+    border-width: 0 4px 4px 0;
+}
+div.column-in {
+    padding: 20px;
+}
+div#footer {
+    color: inherit;
+    background-color: #E5E5E5;
+    border: 1px solid #8B8B8B;
+    border-width: 0 4px 4px 0;
+}
+div#footer-in {
+    padding: 20px;
+}
+
+
+
+
+
+
+/** SUB CONTAINERS **/
+* { }
+
+
+
+
+
+
+/** LISTS **/
+* { }
+
+
+
+
+
+
+/** TYPOGRAPHY **/
+* { }
+
+
+
+
+
+
+/** FORMS **/
+* { }
+
+
+
+
+
+
+/** END **/

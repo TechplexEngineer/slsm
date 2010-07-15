@@ -1,0 +1,1 @@
+<center><img alt="Secondlife Server Managment"  src="img/logo.jpg" /></center>

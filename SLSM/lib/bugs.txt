@@ -1,0 +1,79 @@
+Bugzilla – Full Text Bug Listing
+Home | New | Search |     | Reports | My Votes | Preferences | Administration | Help | Log out techplex.engineer@kenai.com
+Bug 2820
+Summary:	assign users specific mysql tables
+Product:	slsm	Reporter:	techplex.engineer@kenai.com
+Component:	source	Assignee:	techplex.engineer@kenai.com
+Status:	NEW
+Severity:	normal	CC:	issues@slsm.kenai.com
+Priority:	P1
+Version:	1
+Target Milestone:	---
+Hardware:	All
+OS:	All
+Whiteboard:
+
+Description From techplex.engineer@kenai.com 2010-07-14 02:44:12
+The super user, should be able to assign users to be able to access specific
+mysql tables
+in this fashion each user would be completely autonomous of each other.
+Bug 2817
+Summary:	Users can delete each other
+Product:	slsm	Reporter:	techplex.engineer@kenai.com
+Component:	source	Assignee:	techplex.engineer@kenai.com
+Status:	NEW
+Severity:	normal	CC:	issues@slsm.kenai.com
+Priority:	P3
+Version:	1
+Target Milestone:	---
+Hardware:	All
+OS:	All
+Whiteboard:
+
+Description From techplex.engineer@kenai.com 2010-07-13 18:23:53
+It needs to be setup so its based on the $_SESSION variable and ID
+Bug 2819
+Summary:	@todo Feature requests form
+Product:	slsm	Reporter:	techplex.engineer@kenai.com
+Component:	source	Assignee:	techplex.engineer@kenai.com
+Status:	NEW
+Severity:	enhancement	CC:	issues@slsm.kenai.com
+Priority:	P3
+Version:	1
+Target Milestone:	---
+Hardware:	All
+OS:	All
+Whiteboard:
+
+Description From techplex.engineer@kenai.com 2010-07-14 02:37:54
+When this system is ready to go public, it should have a way for the users to
+send me messages.
+either by email or some web app
+Bug 2818
+Summary:	@todo Features for the server management page
+Product:	slsm	Reporter:	techplex.engineer@kenai.com
+Component:	source	Assignee:	techplex.engineer@kenai.com
+Status:	NEW
+Severity:	enhancement	CC:	issues@slsm.kenai.com
+Priority:	P3
+Version:	1
+Target Milestone:	---
+Hardware:	All
+OS:	All
+Whiteboard:
+
+Description From techplex.engineer@kenai.com 2010-07-14 00:03:20
+Delete
+Enable
+Disable
+Ping Server
+Set Text
+Set Dimensions
+Set Position
+Set Color
+Set Texture
+
+Actions:	Home | New | Search |     | Reports | My Votes | Preferences | Administration | Help | Log out techplex.engineer@kenai.com
+Saved Searches:	My Bugs
+
+Vars.php needs to require login

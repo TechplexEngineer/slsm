@@ -1,0 +1,12 @@
+<?php
+$host="localhost"; // Host name 
+$username="slsm"; // Mysql username 
+$password="Phuzzl3"; // Mysql password 
+$db_name="slsm"; // Database name 
+$sqlcon		= mysql_connect($host, $username, $password) or die(mysql_error());
+$sqldb		= mysql_select_db($db_name, $sqlcon);
+
+        $serverstable = "sls_servers";
+        $userstable   = "sls_admins";
+        $varstable    = "sls_config";
+?>

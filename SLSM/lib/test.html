@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>test</title>
+
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script><script>
+            function FillForm(xml) {
+                $("#fred").val(function(i, v)
+                { return xml });
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <div>
+            <button>Feed</button>
+            <button>the</button>
+            <button onClick="javascript:FillForm('hehe');return false;">Input</button>
+        </div>
+        <input type="text" id="fred" value="click a button" />
+        
+    </body><!--  $("button").click(
+            function () {
+                var text2 = "test";
+                $("input").val(text2);
+            });-->
+</html>
