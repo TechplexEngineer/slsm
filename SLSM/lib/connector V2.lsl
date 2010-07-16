@@ -1,36 +1,15 @@
-string comms = "http://techwizworld.net/SLSM/";
+string comms = "http://techwizworld.net/SLSM_TE_3/";
 key httpid;
 key chan;
 integer myid;
+integer checkInTime = 240;
 sync()
 {
     string region = llEscapeURL(llGetRegionName());
     string obj = llEscapeURL(llGetObjectName());
     httpid = llHTTPRequest(comms + "servers.php?cmd=store&name="+obj+"&region="+region+"&key="+(string)llGetKey()+"&xml="+(string)chan+"&id="+(string)myid+"&time="+(string)llGetUnixTime()+"&pos="+(string)llGetPos(), [], "");
-}
-RD(integer integerValue, string stringValue)
-{
-    if (integerValue == 1)
-    {
-        llDie(); // Web server asked me to die :(
-    }
-    else if (integerValue == 2)
-    {
-        llResetScript(); // Web server asked me to reset
-    }
-    else if (integerValue == 3)
-    {
-        sync();
-        state getconf;
-    }
-    else if (integerValue == 5)
-    {
-        state online;
-    }
-    else if (integerValue == 6)
-    {
-        llSetText(stringValue,<1,1,1>,1);
-    }
+
+llOwnerSay("Syncing");
 }
 
 
@@ -44,11 +23,16 @@ default
     {
        state startup;
     }
+    touch_start(integer num)
+    {
+        llOwnerSay("Default");
+    }
 }
 state startup //basically registers the box with the webserver
 {
     state_entry()
     {
+        llOwnerSay("State: Startup");
         if (llGetObjectDesc() == "" | llGetObjectDesc() == " ") // Is the object description empty? Ok lets generate a random ID
         {
             myid = llRound(llFrand(99999));
@@ -60,6 +44,10 @@ state startup //basically registers the box with the webserver
         }
         llOpenRemoteDataChannel(); // Opening a remote data channel
 
+    }
+    touch_start(integer num)
+    {
+        llOwnerSay("startup");
     }
 
 
@@ -81,7 +69,13 @@ state getconf
 {
     state_entry()
     {
+        llOwnerSay("State: GetConf");
         httpid = llHTTPRequest(comms+"retrieve.php?cmd=getconf", [], "");
+         //state online;
+    }
+    touch_start(integer num)
+    {
+        llOwnerSay("getconf");
     }
     http_response(key reqid, integer status, list meta, string data)
     {
@@ -95,11 +89,11 @@ state getconf
             {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 llOwnerSay("Value " + llList2String(temp,x));
-                if (llList2String(temp,x) == "adrot") // We have found a variable that we want
+                if (llList2String(temp,x) == "checkInTime") // We have found a variable that we want
                 {
                     x++; //// - Genius
-                    integer tempint = llList2Integer(temp,x);
-                    llOwnerSay("I got one of your config values + '"+(string)tempint+"'"); // Do some crazy stuff here
+                    checkInTime = llList2Integer(temp,x);
+                    llOwnerSay("Check in time stored: " + (string)checkInTime ); // Do some crazy stuff here
 
                 }
                 else if (llList2String(temp,x) == "test1") // We have found another variable we want
@@ -116,6 +110,8 @@ state getconf
             }
             state online; // Finished reading startup configuration.. Moving on
         }
+        else
+            llOwnerSay("The list does not begin with 'conf'");
     }
 }
 
@@ -127,16 +123,41 @@ state online
     }
     state_entry()
     {
-        llOwnerSay("Information Stored.");
-        llSetTimerEvent(240); // Sent a sync timer - I recommend pulling this time from the website
+        llOwnerSay("State: Online");
+        llSetTimerEvent(checkInTime); // Sent a sync timer - I recommend pulling this time from the website
 
+    }
+    touch_start(integer num)
+    {
+        llOwnerSay("online");
     }
     remote_data(integer type, key channel, key uid, string from, integer integerValue, string stringValue)
     {
 
         if (type == REMOTE_DATA_REQUEST)
         {
-            RD(integerValue, stringValue);
+            if (integerValue == 1)
+            {
+                llDie(); // Web server asked me to die :(
+            }
+            else if (integerValue == 2)
+            {
+                llResetScript();// Web server asked me to reset
+            }
+            else if (integerValue == 3) // Web server has requested a syncronisation
+            {
+                sync();
+            state getconf;
+            }
+            else if (integerValue == 4) // Web server has asked to disabled me
+            {
+                state offline;
+            }
+            else if (integerValue == 6) // Web server has sent floating text information
+            {
+                llSetText(stringValue,<1,1,1>,1);
+            }
+
         }
 
     }
@@ -155,13 +176,38 @@ state offline
     }
     state_entry()
     {
-
+       llOwnerSay("State: Offline");
+    }
+    touch_start(integer num)
+    {
+        llOwnerSay("State: Offline");
     }
     remote_data(integer type, key channel, key uid, string from, integer integerValue, string stringValue)
     {
         if (type == REMOTE_DATA_REQUEST)
         {
-            RD(integerValue, stringValue);
+            if (integerValue == 1)
+            {
+                llDie(); // Web server asked me to die :(
+            }
+            else if (integerValue == 2)
+            {
+                llResetScript(); // Web server asked me to reset
+            }
+            else if (integerValue == 3)
+            {
+                sync();
+                state getconf;
+            }
+            else if (integerValue == 5)
+            {
+                state online;
+            }
+            else if (integerValue == 6)
+            {
+                llSetText(stringValue,<1,1,1>,1);
+            }
+
         }
         else {
             // Code would go here to respond to a new open channel, etc...
