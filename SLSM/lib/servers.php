@@ -38,6 +38,8 @@ if ($_GET['cmd'] == "del")
     $getqry = mysql_query($getsql) or die(mysql_error());
 } else if ($_GET['cmd'] == "Send")
 {
+    $select = $_REQUEST['select'];
+    print_r($select);
     $slcmd = $_GET['slcmd'];
     if ($_GET['sendall'] == "yes")
     {
@@ -75,39 +77,15 @@ if ($_GET['cmd'] == "del")
         }
     } else
     {
-            $serversarray = array();
-            for($counter =1; $counter <= ($_GET['numrows']+1); $counter++)
-            {
-                $value = $_GET['xml'.$counter];
-                $serversarray[] = $value;
-//                if(empty($value))
-//                    $valempty = true;
-//                echo " |One" . $value .":)". $valempty . "| ";
-
-            }
-
         if ($slcmd == "kill")
         {
             $integer_var = 1;
+            $idtodelete = $_REQUEST['select'];//@todo need to do a loop here
 
-//            for($counter =1; $counter <= ($_GET['numrows']+1); $counter++)
-//            {
-//                $value = $_GET['xml'.$counter];
-//
-//                if(empty($value))
-//                    $valempty = true;
-//                echo " |One" . $value .":)". $valempty . "| ";
-//
-//            }
-
-
-//            $servArray = array((0 => $_GET['xml'][0])
-//            $idtodelete = array(0 => $_GET['xml'][0], 1 => $_GET['xml'][1]) ;
-//            //$idtodelete = $_GET['xml'][0];
-//            echo gettype($idtodelete);
-//            print_r($idtodelete);
-//            $getsql = "DELETE FROM `sls_servers` WHERE `sxml`='$idtodelete'";
-//            //$getqry = mysql_query($getsql) or die(mysql_error());
+            echo("Killing " . print_r($idtodelete));
+            //print_r($idtodelete);
+            $getsql = "DELETE FROM `" .$_SESSION['serverstable']. "` WHERE `sxml`='" .$idtodelete['0']. "'";
+            $getqry = mysql_query($getsql) or die(mysql_error());
         } else if ($slcmd == "reset")
         {
             $integer_var = 2;
@@ -125,7 +103,13 @@ if ($_GET['cmd'] == "del")
         {
             $integer_var = 5;
         }
-        do_xml_post($_GET['xml'], $integer_var, $string_var);
+        /*
+         * This is so that all the checked servers get the message
+         */
+        foreach ($select as $selectname)
+        {
+            do_xml_post($selectname, $integer_var, $string_var);
+        }
     }
 } else if ($_REQUEST['cmd'] == "store")
 {
@@ -201,10 +185,8 @@ if ($_GET['cmd'] == "del")
                             <?
                             $getsql = "SELECT * FROM `sls_servers`";
                             $getqry = mysql_query($getsql) or die(mysql_error());
-                            $numrows = mysql_num_rows($getqry);
-                            if ( $numrows > 0)
+                            if (mysql_num_rows($getqry) > 0)
                             {
-
                                 echo "<table width='100%' border='1'>";
                                 echo "<td>ID</td>";
                                 echo "<td>Server Name</td>";
@@ -214,10 +196,8 @@ if ($_GET['cmd'] == "del")
                                 echo "<td>Last Seen</td>";
                                 echo "<td>Select</td>";
                                 $res = $getqry;
-                                $count = 1;
                                 while ($row = mysql_fetch_assoc($res))
                                 {
-
                                     $slsid = $row['sid'];
                                     $slsname = $row['sname'];
                                     $slskey = $row['skey'];
@@ -235,27 +215,23 @@ if ($_GET['cmd'] == "del")
                                     {
                                         $getsql = "DELETE FROM `" .$_SESSION['serverstable']. "` WHERE sid = '" .$slsid. "'";
                                         $getqry = mysql_query($getsql) or die(mysql_error());
-                                        echo "deleting " . $slsid . " diff: " . $diff; //@todo make a javascript confirm popup
+                                        echo "deleting " . $slsid . " diff: " . $diff;
                                     } else
                                     {
                                         echo "<tr>\n";
                                         echo "<td>$slsid</td>\n";
                                         echo "<td>$slsname</td>";
-                                        //echo "<td>$slskey</td>";
-                                        echo "<td>$slsxml</td>";
+                                        echo "<td>$slskey</td>";
                                         echo "<td>$slsregion</td>";
                                         echo "<td>$slspos</td>";
                                         echo "<td>$slstime min</td>";
 
                                         //echo "<td><a href=\"#\" onClick=\"javascript:FillForm('" . $slsxml . "');return false;\"><img src=\"img/tick.gif\" border=\"0\"></a></td>\n";
                                         //echo "<td> <button onClick=\"javascript:FillForm(\'hehe\');return false;\">Input</button></td>";
-                                        echo "<td><center><input type=\"checkbox\" name=\"xml" .$count. "\" value='" . $slsxml . "'/></center></td>";
+                                        echo "<td><center><input type=\"checkbox\" name=\"select\" value='" . $slsxml . "'/></center></td>";
                                         //echo "<td><a href=\"servers.php?cmd=del&id=$slsid\" OnClick=\"return confirm('Are you sure you want to delete $slsname? The server will be unavailable until it next syncronises.');\"><img src=\"img/cross.gif\" border\"0\"></a></td>";
                                         echo "</tr>";
-                                        //@todo get length of mysql table and send it to loop above
                                     }
-                                    $count +=1;
-                                    
                                 }
                                 echo "</table>";
                             } else
@@ -278,18 +254,22 @@ if ($_GET['cmd'] == "del")
                                     <input type="radio" name="slcmd" value="reset" id="RadioGroup1_1" />
                                     Reset</label>
                                 <br />
+
                                 <label>
                                     <input type="radio" name="slcmd" value="disable" id="RadioGroup1_1" />
                                     Disable</label>
                                 <br />
+
                                 <label>
                                     <input type="radio" name="slcmd" value="enable" id="RadioGroup1_1" />
                                     Enable</label>
                                 <br />
+
                                 <label>
                                     <input type="radio" name="slcmd" value="store" id="RadioGroup1_2" />
                                     Update Information</label>
                                 <br />
+
                                 <label>
                                     <input type="radio" name="slcmd" value="st" id="RadioGroup1_2" />
                                     Set Text</label>
@@ -304,7 +284,6 @@ if ($_GET['cmd'] == "del")
                             <br />
                             <label for="submit"></label>
                             <input type="submit" name="cmd" id="cmd" value="Send" />
-                            <input type="hidden" name="numrows" id="" value="<?php echo $numrows; ?>" />
                         </form>
                         <p>&nbsp;</p>
                     </div> <!-- end .content-in -->
