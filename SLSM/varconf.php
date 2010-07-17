@@ -14,20 +14,20 @@ if ($_REQUEST['cmd'] == "Save Changes")
     {
         if ($key != "cmd")
         {
-            $getsql = "REPLACE INTO `" .$varstable. "` (`config_name`,`config_value`) VALUES ('$key','$value')";
+            $getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`config_name`,`config_value`) VALUES ('$key','$value')";
             $getqry = mysql_query($getsql) or die(mysql_error());
         }
     }
 } else if ($_GET['cmd'] == "del")
 {
     $idtodelete = $_GET['name'];
-    $getsql = "DELETE FROM `" .$varstable. "` WHERE `config_name`='$idtodelete'";
+    $getsql = "DELETE FROM `" . $_SESSION['varstable'] . "` WHERE `config_name`='$idtodelete'";
     $getqry = mysql_query($getsql) or die(mysql_error());
 } else if ($_GET['cmd'] == "Add")
 {
     $nametoadd = $_GET['confname'];
     $valtoadd = $_GET['confval'];
-    $getsql = "REPLACE INTO `" .$varstable. "` (`config_name`,`config_value`) VALUES ('$nametoadd','$valtoadd')";
+    $getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`config_name`,`config_value`) VALUES ('$nametoadd','$valtoadd')";
     $getqry = mysql_query($getsql) or die(mysql_error());
 }
 ?>
@@ -80,9 +80,9 @@ if ($_REQUEST['cmd'] == "Save Changes")
 
                 <div class="content">
                     <div class="content-in">
-                        <h1> Configuration</h1>
+                        <h1>Variable Management</h1>
                         <form action="" method="get" name="form1" id="form1">
-                            <p>Variable Management:</p>
+                            <h3>Variables:</h3>
                             <table border="1px" width="100%">
                                 <tr>
                                     <th>Name:</th>
@@ -93,25 +93,29 @@ if ($_REQUEST['cmd'] == "Save Changes")
 
 
                                 <?php
-                                $getsql = "SELECT * FROM `" .$varstable. "`";
+                                $getsql = "SELECT * FROM `" . $_SESSION['varstable'] . "`";
                                 $getqry = mysql_query($getsql) or die(mysql_error());
                                 while ($row = mysql_fetch_assoc($getqry))
                                 {
                                     $setname = $row['config_name'];
                                     $setvalue = $row['config_value'];
+                                    $sysvar = $row['sys_var'];
+//                                    echo $sysvar;
                                     echo "<tr>";
-                                        echo "<td>";
-                                            echo "<label for='$setname'>$setname</label>";
-                                        echo "</td>";
-                                        echo "<td>";
-                                            echo "<input name='$setname' type='text' id='$setname' value='$setvalue'  />";
-                                        echo "</td>";
-                                        echo "<td>";
-                                            if($setname != "checkInTime")
-                                                echo "<a href=\"varconf.php?cmd=del&name=$setname\" OnClick=\"return confirm('Are you sure you want to delete $setname? This change will not be reflected until the servers next syncronisation phase.');\"><img src=\"img/cross.gif\" border\"0\"></a><br/>";
-                                            else
-                                                echo "System Varibles can not be deleted";
-                                        echo "</td>";
+                                    echo "<td>";
+                                    echo "<label for='$setname'>$setname</label>";
+                                    echo "</td>";
+                                    echo "<td>";
+                                    echo "<input name='$setname' type='text' id='$setname' value='$setvalue'  />";
+                                    echo "</td>";
+                                    echo "<td>";
+                                    if ($sysvar)
+                                        echo "System Varibles can not be deleted";
+                                    else
+                                        echo "<a href=\"varconf.php?cmd=del&name=$setname\" OnClick=\"return confirm('Are you sure you want to delete $setname? This change will not be reflected until the servers next syncronisation phase.');\"><img src=\"img/cross.gif\" border\"0\"></a><br/>";
+
+
+                                    echo "</td>";
                                     echo "</tr>";
                                 }
                                 ?>
@@ -123,11 +127,15 @@ if ($_REQUEST['cmd'] == "Save Changes")
 
                         </form>
                         <form id="form2" name="form2" method="get" action="">
-                            <p>Add Variable</p>
-                            <label for="confname">Name</label>
+                            <h3>Add a Variable:</h3>
+                            <label for="confname">Name:</label>
                             <input type="text" name="confname" id="confname" />
-                            <label for="confval">Value</label>
+<!--                            <br />-->
+                            <label for="confval">Value:</label>
                             <input type="text" name="confval" id="confval" />
+                            <br/>
+                            <label for="sysvar">System Variable:</label>
+                            <input type="checkbox" name="sysvar" value="true" />
 
                             <p>
                                 <label for="Add"></label>
@@ -141,7 +149,7 @@ if ($_REQUEST['cmd'] == "Save Changes")
             <div class="clear"></div>-->
             <div id="footer">
                 <div id="footer-in">
-                    <?php include "lib/footer.php"; ?>
+<?php include "lib/footer.php"; ?>
                 </div> <!-- end #footer-in -->
             </div> <!-- end #footer -->
         </div> <!-- end div#container -->

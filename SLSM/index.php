@@ -69,15 +69,16 @@ include("lib/_mysql.php");
                         <h2>Using the System</h2>
                         <p>This website was designed with simplicity in mind, because of this you will find some simple links on the left hand side that will allow you to make changes to your system, the different sections include:</p>
                         <ul>
-                            <li>Server Management - This allows you to reset, reload, disable, enable or kill any of the servers remotely.</li>
-                            <li>Admin Management - This allows you to add or remove admins that have access to this site.</li>
+                            <li>Servers - This page contains the list of all the servers registered with the system. This allows you to reset, reload, disable, enable or kill any of the servers remotely.</li>
+                            <li>Variables - this page contains the list of all the variables stored in the database. </li>
+                            <li>Users - This allows you to add or remove admins that have access to this site.</li>
                             <li>Configuration - This allows you to make changes to the server configuration in game.</li>
                             <li>Logout - This will log you out of this website.</li>
                         </ul>
                         <p>If you require any additional help, please contact Hero Jimador in game.</p>
                         <h2>Support</h2>
-                        <p>I understand that for most people it may seem daunting to try and configure this webscript and in game script, I have made it as simple as I can with the attached documentation and video.</p>
-                        <p>If however, you are unable to get the product working in the way you'd like then you are free to contact me in game and we can work out the issues that you are having.</p>
+<!--                        <p>I understand that for most people it may seem daunting to try and configure this webscript and in game script, I have made it as simple as I can with the attached documentation and video.</p>-->
+<!--                        <p>If however, you are unable to get the product working in the way you'd like then you are free to contact me in game and we can work out the issues that you are having.</p>-->
                         <p>&nbsp;</p>
                     </div> <!-- end .content-in -->
                 </div> <!-- end .content -->

@@ -18,7 +18,7 @@ function confirm($msg)
 if ($_GET['cmd'] == "del")
 {
     $idtodelete = $_GET['id'];
-    $getsql = "DELETE FROM `" .$userstable. "` WHERE id=$idtodelete";
+    $getsql = "DELETE FROM `" . $userstable . "` WHERE id=$idtodelete";
     $getqry = mysql_query($getsql) or die(mysql_error());
 } else if ($_GET['cmd'] == "Update")
 {
@@ -27,11 +27,11 @@ if ($_GET['cmd'] == "del")
         //return confirm("No information submitted.");
     } else
     {
-        echo "id is not blank";
+        //echo "id is not blank";
         $idtoupdate = $_GET['id'];
         $user = $_GET['username'];
         $pass = $_GET['password'];
-        $getsql = "REPLACE INTO `" .$userstable. "` (id,username,password) VALUES ('$idtoupdate','$user','$pass')";
+        $getsql = "REPLACE INTO `" . $userstable . "` (id,username,password) VALUES ('$idtoupdate','$user','$pass')";
         $getqry = mysql_query($getsql) or die(mysql_error());
     }
 }
@@ -84,19 +84,24 @@ if ($_GET['cmd'] == "del")
 
                 <div class="content">
                     <div class="content-in">
-                        <h1> Admin Management</h1>
-                        <p>
-                            <?
-                            $getsql = "SELECT * FROM `" .$userstable. "`";
+                        <?
+                        //print_r($_SESSION);
+                        if ($_SESSION['id'] == 1) //is the super user logged in?
+                        {
+                            echo "<h1> User Management</h1>";
+                            echo "<p>";
+
+                            $getsql = "SELECT * FROM `" . $userstable . "`";
                             $getqry = mysql_query($getsql) or die(mysql_error());
-                            if (mysql_num_rows($getqry) > 0)
+                            $numRows = mysql_num_rows($getqry);
+                            if ($numRows > 0)
                             {
                                 echo "<table width='100%' border='1'>";
                                 echo "<th>ID</th>";
                                 echo "<th>Username</th>";
                                 echo "<th>Password</th>";
                                 echo "<th>Select</th>";
-                                if($_SESSION['id'] == 1)
+                                if ($_SESSION['id'] == 1)
                                     echo "<th>Delete</th>";
 
                                 while ($row = mysql_fetch_assoc($getqry))
@@ -110,10 +115,12 @@ if ($_GET['cmd'] == "del")
                                     echo "<td>$slsusername</td>";
                                     echo "<td>-hidden-</td>";
                                     echo "<td><a href=\"#\" onClick=\"javascript:FillForm('" . $slsid . "', '" . $slsusername . "');return false;\"><img src=\"img/tick.gif\" border=\"0\"></a></td>\n";
-                                    if($slsid != 1)
-                                        echo "<td><a href=\"manageadmins.php?cmd=del&id=$slsid\" OnClick=\"return confirm('Are you sure you want to delete $slsusername ?');\"><img src=\"img/cross.gif\" border\"0\"></a></td>";
-                                    else if($_SESSION['id'] != 1)
-                                        echo "<td>You can't delete yourself '" . $myusername . "'</td>";
+                                    if ($slsid != 1)
+                                        echo "<td><a href=\"users.php?cmd=del&id=$slsid\" OnClick=\"return confirm('Are you sure you want to delete $slsusername ?');\"><img src=\"img/cross.gif\" border\"0\"></a></td>";
+                                    else
+                                        echo "<td>The Superuser can not be removed</td>";
+//                                    else if ($_SESSION['id'] == $slsid)
+//                                        echo "<td>You can't delete yourself</td>";
                                     echo "</tr>";
                                 }
                                 echo "</table>";
@@ -121,58 +128,121 @@ if ($_GET['cmd'] == "del")
                             {
                                 echo "No admins.";
                             }
-                            ?>
+                            echo "</p>";
+                        }
+                        else
+                            echo "//@todo only allow them to edit their password";
+                        ?>
 
 
-                        </p>
+                        <table width="100%">
+                            <tr>
+                                <td>
+                                    <form action="" method="get" enctype="application/x-www-form-urlencoded" name="form1" id="form1">
+                                        <script type="text/javascript" src="jquery-1.4.min.js"></script>
+                                        <script type="text/javascript">
+                                            function FillForm(ids,usernames ) {
+                                                $("#id").val(ids);
+                                                $("#username").val(usernames);
+                                            }
+                                            function notEmpty(elem, helperMsg){
+                                                if(elem.value.length == 0)
+                                                {
+                                                    alert(helperMsg);
+                                                    elem.focus(); // set the focus to this input
+                                                    return false;
+                                                }
+                                                else
+                                                    return true;
+                                            }
 
-                        <form action="" method="get" enctype="application/x-www-form-urlencoded" name="form1" id="form1">
-                            <script type="text/javascript" src="jquery-1.4.min.js"></script>
-                            <script type="text/javascript">
-                                function FillForm(ids,usernames ) {
-                                    $("#id").val(ids);
-                                    $("#username").val(usernames);
-                                    
-                                    console.log(usernames);
+                                        </script>
 
+                                        <h3>Edit User Information:</h3>
+                                        <table>
+                                            <tr>
+                                                <td><label for="id">ID</label></td>
+                                                <td><input name="id" type="text" readonly="readonly" id="id" <? if ($_SESSION['id'] != 1)
+                            echo "value=\"" . $_SESSION['id'] . "\" "; ?>/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="username">Username</label></td>
+                                                <td><input type="text" name="username" id="username" <? if ($_SESSION['id'] != 1)
+                                                               echo "value=\"" . $_SESSION['user'] . "\" "; ?>/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><label for="password">Password</label></td>
+                                                <td><input type="password" name="password" id="password" value=""/></td>
+                                            </tr>
+
+                                        </table>
+                                        <p>
+                                            <label for="submit"></label>
+                                            <input type="submit" name="cmd" id="cmd" value="Update" onclick="notEmpty(document.getElementById('id'), 'Please Enter a Value')" />
+                                        </p>
+                                    </form>
+                                </td>
+                                <? if($_SESSION['id'])
+                                {
+                                    echo "<td>";
+                                    echo "<form action=\"\" method=\"get\" enctype=\"application/x-www-form-urlencoded\" name=\"form1\" id=\"form1\">";
+                                        echo "<script type=\"text/javascript\" src=\"jquery-1.4.min.js\"></script>";
+                                        echo "<script type=\"text/javascript\">
+                                            function FillForm(ids,usernames ) {
+                                                $(\"#id\").val(ids);
+                                                $(\"#username\").val(usernames);
+                                            }
+                                            function notEmpty(elem, helperMsg){
+                                                if(elem.value.length == 0)
+                                                {
+                                                    alert(helperMsg);
+                                                    elem.focus(); // set the focus to this input
+                                                    return false;
+                                                }
+                                                else
+                                                    return true;
+                                            }
+
+                                        </script>";
+
+                                        echo "<h3>Create a new user:</h3>";
+                                        echo "<table>";
+                                            echo "<tr>";
+                                               echo " <td><label for=\"id\">ID</label></td>";
+                                                echo "<td><input name=\"id\" type=\"text\" readonly=\"readonly\" id=\"id\" value=\" " . ($numRows+1) . "\"   /></td>";
+                                          echo "</tr>";
+                                            echo "<tr>";
+                                                echo "<td><label for=\"username\">Username</label></td>";
+                                                echo "<td><input type=\"text\" name=\"username\" id=\"username\"/></td>";
+                                            echo "</tr>";
+                                            echo "<tr>";
+                                                echo "<td><label for=\"password\">Password</label></td>";
+                                                echo "<td><input type=\"password\" name=\"password\" id=\"password\" value=\"\"/></td>";
+                                            echo "</tr>";
+
+                                        echo "</table>";
+                                        echo "<p>";
+                                            echo "<label for=\"submit\"></label>";
+                                            echo "<input type=\"submit\" name=\"cmd\" id=\"cmd\" value=\"Update\" onclick=\"notEmpty(document.getElementById('id'), 'Please Enter a Value')\" />";
+                                        echo "</p>";
+                                    echo "</form>";
+                                echo "</td>";
                                 }
-                                function notEmpty(elem, helperMsg){
-                                    if(elem.value.length == 0)
-                                    {
-                                        alert(helperMsg);
-                                        elem.focus(); // set the focus to this input
-                                        return false;
-                                    }
-                                    else
-                                        return true;
-                            
-                                }
-                            </script>
-
-                            <p>Edit User Information</p>
-                            <table>
-                                <tr>
-                                    <td><label for="id">ID</label></td>
-                                    <td><input name="id" type="text" id="id" /></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="username">Username</label></td>
-                                    <td><input type="text" name="username" id="username" /></td>
-                                </tr>
-                                <tr>
-                                    <td><label for="password">Password</label></td>
-                                    <td><input type="password" name="password" id="password" /></td>
-                                </tr>
-                            </table>
-                            <p>
-                                <label for="submit"></label>
-                                <input type="submit" name="cmd" id="cmd" value="Update" onclick="notEmpty(document.getElementById('id'), 'Please Enter a Value')" />
-                            </p>
-                        </form>
+                                /*
+                                CREATE TABLE  `slsm`.`Canned|Soup` (
+`config_name` VARCHAR( 255 ) NOT NULL ,
+`config_value` VARCHAR( 255 ) NOT NULL ,
+`	config_value	sys_var` VARCHAR( 3 ) NOT NULL
+) ENGINE = MYISAM ;*/
+                                
+                                
+                                ?>
+                            </tr>
+                        </table>
                         <p>&nbsp;</p>
                     </div> <!-- end .content-in -->
                 </div> <!-- end .content -->
-            </div> <!-- end #content-wrap 
+            </div> <!-- end #content-wrap
             <div class="clear"></div>-->
             <div id="footer">
                 <div id="footer-in">

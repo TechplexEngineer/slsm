@@ -7,7 +7,7 @@
     <li><a href="logout.php">Logout</a></li>
 </ul>
 <?
-$getsql = "SELECT * FROM `" .$serverstable. "`";
+$getsql = "SELECT * FROM `" .$_SESSION['serverstable']. "`";
 $getqry = mysql_query($getsql) or die(mysql_error());
 if (mysql_num_rows($getqry) > 1)
     echo mysql_num_rows($getqry) . " Servers Online<br/>";
