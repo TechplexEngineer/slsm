@@ -131,7 +131,7 @@ if ($_GET['cmd'] == "del")
                             echo "</p>";
                         }
                         else
-                            echo "//@todo only allow them to edit their password";
+                            //echo "//@todo only allow them to edit their password";
                         ?>
 
 
@@ -182,7 +182,7 @@ if ($_GET['cmd'] == "del")
                                         </p>
                                     </form>
                                 </td>
-                                <? if($_SESSION['id'])
+                                <? if($_SESSION['id'] == 1 )
                                 {
                                     echo "<td>";
                                     echo "<form action=\"\" method=\"get\" enctype=\"application/x-www-form-urlencoded\" name=\"form1\" id=\"form1\">";

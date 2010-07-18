@@ -155,7 +155,7 @@ if ($_GET['cmd'] == "del")
         </script>
 
         <!-- Stylesheets -->
-        <link href="css/reset.css" rel="stylesheet" type="text/css" media="all" />
+<!--        <link href="css/reset.css" rel="stylesheet" type="text/css" media="all" />-->
         <link href="css/default.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/styling.css" rel="stylesheet" type="text/css" media="screen" />
         <!-- Print Stylesheet -->

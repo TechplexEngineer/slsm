@@ -4,18 +4,17 @@ include "lib/_mysql.php";
 // Connect to server and select databse.
 mysql_connect("$host", "$username", "$password") or die("cannot connect");
 mysql_select_db("$db_name") or die("cannot select DB");
-$userstable   = "sls_admins";
+$userstable = "sls_admins";
 
 function getUsrVal($username, $table, $want)
 {
-    $getsql = "SELECT * FROM `" .$table. "`";
+    $getsql = "SELECT * FROM `" . $table . "`";
     $getqry = mysql_query($getsql) or die(mysql_error());
-    while ($row = mysql_fetch_assoc($getqry)) 
+    while ($row = mysql_fetch_assoc($getqry))
     {
-        if($row['username']==$username)
-           return $row[$want];
+        if ($row['username'] == $username)
+            return $row[$want];
     }
-    
 }
 
 if ($_POST['myusername']) //if (the field has been filled)
@@ -46,10 +45,10 @@ if ($_POST['myusername']) //if (the field has been filled)
         //session_register("myusername");
         //session_register("mypassword");
         $_SESSION['user'] = $myusername;
-        $_SESSION['pass'] = $mypassword;//" . $myusername . "
-        
+        $_SESSION['pass'] = $mypassword; //" . $myusername . "
+
         $sql = "SELECT * FROM `" . $userstable . "` WHERE username='" . $myusername . "'";
-        $query =  mysql_query($sql) or die(mysql_error()); //$_SESSION['id'] =
+        $query = mysql_query($sql) or die(mysql_error()); //$_SESSION['id'] =
         $row = mysql_fetch_assoc($query);
 
 //id
@@ -62,17 +61,12 @@ if ($_POST['myusername']) //if (the field has been filled)
         $_SESSION['SL_last'] = $row['SL_last'];
 //perms
         $_SESSION['perms'] = $row['perms'];
-    
+
 
 
 //        $sql = "SELECT * FROM `" . $userstable . "` WHERE username='" . $myusername . "'";
 //        $query =  mysql_query($sql) or die(mysql_error()); //$_SESSION['id'] =
 //        $row = mysql_fetch_assoc($query);
-
-
-
-
-
 //        $sql = "SELECT uuid FROM `" . $userstable . "` WHERE username='" . $myusername1 . "'";
 //        $_SESSION['uuid'] = mysql_query($sql) or die(mysql_error());
 //        $sql = "SELECT SL_first FROM `" . $userstable . "` WHERE username='" . $myusername1 . "'";
@@ -82,8 +76,16 @@ if ($_POST['myusername']) //if (the field has been filled)
 //        $sql = "SELECT perms FROM `" . $userstable . "` WHERE username='" . $myusername1 . "'";
 //        $_SESSION['perms'] = mysql_query($sql) or die(mysql_error());
 
+
         $_SESSION['serverstable'] = "sls_servers";
-        $_SESSION['varstable'] = "sls_config";
+
+        if (!empty($_SESSION['perms']) && $_SESSION['perms'] != "all")
+            $_SESSION['varstable'] = $row['perms'];
+        else
+            $_SESSION['varstable'] = "sls_config";
+
+
+        $_SESSION['serverstable'] = "sls_servers";
         $_SESSION['userstable'] = $userstable;
 
 

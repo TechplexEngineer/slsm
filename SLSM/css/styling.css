@@ -58,6 +58,19 @@ div#footer {
 div#footer-in {
     padding: 20px;
 }
+h4 {
+
+    margin-right: 0px;
+    margin-left: 0px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+a.usernameClass:link {color: #0000ff; font-size: 18pt; font-weight: bold;}
+a.usernameClass:visited {color: #0000ff; font-size: 18pt; font-weight: bold;}
+a.usernameClass:active {color: #0000ff; font-size: 18pt; font-weight: bold;}
+a.usernameClass:hover {color: #0000ff; font-size: 18pt; font-weight: bold;}
+
+
 
 
 
