@@ -79,9 +79,9 @@ if ($_POST['myusername']) //if (the field has been filled)
 
         $_SESSION['serverstable'] = "sls_servers";
 
-        if (!empty($_SESSION['perms']) && $_SESSION['perms'] != "all")
-            $_SESSION['varstable'] = $row['perms'];
-        else
+//        if (!empty($_SESSION['perms']) && $_SESSION['perms'] != "all")
+//            $_SESSION['varstable'] = $row['perms'];
+//        else
             $_SESSION['varstable'] = "sls_config";
 
 

@@ -5,8 +5,8 @@
     <li><a href="varconf.php">Variables</a></li>
     <? if($_SESSION['id'] == 1)
         echo '<li><a href="users.php">Users</a></li>';
-    else
-        echo '<li><a href="users.php">Account</a></li>';
+    //else
+    //    echo '<li><a href="users.php">Account</a></li>';
     ?>
     <li><a href="logout.php">Logout</a></li>
 </ul>

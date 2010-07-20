@@ -23,9 +23,9 @@
 ######################################################################
 
 $dbhost = 'localhost';
-$dbuser = 'your_username';
-$dbpass = 'your_password';
-$dbname = 'your_database';
+$dbuser = 'robotics';
+$dbpass = 'Phuzzl3';
+$dbname = 'sldb_1';
 $dbtable = 'sldb_data';
 
 ######################################################################

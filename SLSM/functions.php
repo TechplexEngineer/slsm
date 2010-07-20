@@ -1,7 +1,7 @@
 <?php
 include "lib/_mysql.php";
 
-function get($name, $varstable)
+function get($varID, $name, $varstable)
 {
     $getsql = "SELECT * FROM `" .$varstable. "`";
     $getqry = mysql_query($getsql) or die(mysql_error());
@@ -15,12 +15,12 @@ function get($name, $varstable)
     return $row['config_value'];
 }
 //we don't care about its old value so do a mysql replace
-function edit($name2Edit, $value2Add, $varstable)
+function edit($varID, $name2Edit, $value2Change, $varstable)
 {
-    $getsql = "REPLACE INTO `" .$varstable. "` (`config_name`,`config_value`) VALUES ('$name2Edit','$value2Add')";
+    $getsql = "REPLACE INTO `" .$varstable. "` (`config_name`,`config_value`) VALUES ('$name2Edit','$value2Change')";
     $getqry = mysql_query($getsql) or die(mysql_error());
 }
-function create($name2Add, $value2Add, $varstable)
+function create($varID, $name2Add, $value2Add, $sysvar, $varstable)
 {
     $getsql = "REPLACE INTO `" .$varstable. "` (`config_name`,`config_value`) VALUES ('$name2Add','$value2Add')";
     $getqry = mysql_query($getsql) or die(mysql_error());

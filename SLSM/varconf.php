@@ -6,6 +6,7 @@ if (empty($_SESSION['user']))
     header("location:login.php");
 }
 include("lib/_mysql.php");
+include("functions.php");
 ?>
 <?php
 if ($_REQUEST['cmd'] == "Save Changes")
@@ -14,8 +15,9 @@ if ($_REQUEST['cmd'] == "Save Changes")
     {
         if ($key != "cmd")
         {
-            $getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`config_name`,`config_value`) VALUES ('$key','$value')";
-            $getqry = mysql_query($getsql) or die(mysql_error());
+            edit($key, $value, $_SESSION['varstable']);
+            //$getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`config_name`,`config_value`) VALUES ('$key','$value')";
+            //$getqry = mysql_query($getsql) or die(mysql_error());
         }
     }
 } else if ($_GET['cmd'] == "del")
@@ -25,10 +27,23 @@ if ($_REQUEST['cmd'] == "Save Changes")
     $getqry = mysql_query($getsql) or die(mysql_error());
 } else if ($_GET['cmd'] == "Add")
 {
-    $nametoadd = $_GET['confname'];
-    $valtoadd = $_GET['confval'];
-    $getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`config_name`,`config_value`) VALUES ('$nametoadd','$valtoadd')";
-    $getqry = mysql_query($getsql) or die(mysql_error());
+    $varID = get("varCount", "slsm_global-vars");
+    $varID ++;
+    edit("varCount", $varID, $_SESSION['varstable']);
+
+    $name2Add = $_GET['confname'];
+    $value2Add = $_GET['confval'];
+    $owneruuid = $_SESSION['uuid'];
+
+    if($_GET['sysvar'] == true)
+        $sysvar = true;
+    else
+        $sysvar = false;
+
+    create($varID, $name2Add, $value2Add, $sysvar, $_SESSION['varstable']);
+
+    //$getsql = "REPLACE INTO `" . $_SESSION['varstable'] . "` (`varId`,`owner_uuid`,`config_name`,`config_value`, `sys_var`) VALUES ('$varID','$owneruuid', '$nametoadd','$valtoadd','$sysVarVal')";
+    //$getqry = mysql_query($getsql) or die(mysql_error());
 }
 ?>
 
@@ -93,7 +108,7 @@ if ($_REQUEST['cmd'] == "Save Changes")
 
 
                                 <?php
-                                $getsql = "SELECT * FROM `" . $_SESSION['varstable'] . "`";
+                                $getsql = "SELECT * FROM `" . $_SESSION['varstable'] . "` WHERE owner_uuid='" .$_SESSION['uuid']. "' ";
                                 $getqry = mysql_query($getsql) or die(mysql_error());
                                 while ($row = mysql_fetch_assoc($getqry))
                                 {
