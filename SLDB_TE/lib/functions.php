@@ -60,7 +60,6 @@ function authorize($userstable, $user, $pass) {
 //do an authorization based on key rather than username
 //pass is the data_pass
 function authKey($usertable, $uuid, $pass) {
-    echo "authkey";
     $getsql = "SELECT * FROM `" . $usertable . "` WHERE uuid='" . $uuid . "'";
     $getqry = mysql_query($getsql) or die(mysql_error());
     while ($row = mysql_fetch_assoc($getqry)) {

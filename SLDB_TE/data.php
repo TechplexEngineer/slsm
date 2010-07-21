@@ -70,7 +70,7 @@ if ($reverse == "yes" || $reverse == "true" || $reverse == 1) {
 //        break;
 //}
 
-if (authKey($user_table, $key, $password)) {
+if (authKey($users_table, $key, $password)) {
     die("ERROR: NOT AUTHENTICATED");
 }
 
