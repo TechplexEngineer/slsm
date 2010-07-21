@@ -7,7 +7,7 @@ include "lib/functions.php";
 mysql_connect("$host", "$username", "$password") or die("cannot connect");
 mysql_select_db("$db_name") or die("cannot select DB");
 
-if(authorize($users_table)) // authorize function defined in functions.php
+if(authorize($users_table, $_REQUEST['myusername'], $_REQUEST['mypassword'])) // authorize function defined in functions.php
 {
     header("location:index.php");
 }

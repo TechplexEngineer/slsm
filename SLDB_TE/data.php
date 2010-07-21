@@ -14,11 +14,13 @@
 ######################################################################
 //if(file_exists('install.php')) die ("ERROR: INSTALL FILE NOT DELETED");
 
-include 'config.php';
-include 'vars.php';
+include 'lib/_mysql.php';
+include 'lib/config.php';
+//include 'lib/vars.php';
+include 'lib/functions.php';
 
-mysql_connect($dbhost, $dbuser, $dbpass) or die('ERROR: CANNOT CONNECT TO DATABASE.');
-mysql_select_db($dbname) or die('ERROR: CANNOT SELECT DATABASE.');
+//mysql_connect($dbhost, $dbuser, $dbpass) or die('ERROR: CANNOT CONNECT TO DATABASE.');
+//mysql_select_db($dbname) or die('ERROR: CANNOT SELECT DATABASE.');
 
 ######################################################################
 # POST AND GET VARIABLES
@@ -56,21 +58,19 @@ if ($reverse == "yes" || $reverse == "true" || $reverse == 1) {
     $reverse = false;
 }
 
-// here we need to request the password associated with the key
-$getsql = "SELECT * FROM `" . $user_table . "` WHERE uuid='" .$key. "'";
+//// here we need to request the password associated with the key
+//$getsql = "SELECT * FROM `" . $user_table . "` WHERE uuid='" .$key. "'";
+//
+//$getqry = mysql_query($getsql) or die(mysql_error());
+//while ($row = mysql_fetch_assoc($getqry)) {
+//    $curUUID = $row['uuid'];
+//    $currValue = $row['password'];
+//
+//    if ($curUUID == $key)
+//        break;
+//}
 
-$getqry = mysql_query($getsql) or die(mysql_error());
-while ($row = mysql_fetch_assoc($getqry)) {
-    $curUUID = $row['uuid'];
-    $currValue = $row['password'];
-
-    if ($curUUID == $key)
-        break;
-}
-
-
-
-if ($password != $currValue) {
+if (authKey($user_table, $key, $password)) {
     die("ERROR: NOT AUTHENTICATED");
 }
 
@@ -89,7 +89,7 @@ if ($separator == '') {
 
 $fields = explode($separator, $fields);
 $values = explode($separator, $values);
-
+echo "functions";
 ######################################################################
 # FUNCTIONS
 #
