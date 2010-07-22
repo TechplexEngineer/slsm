@@ -1,6 +1,7 @@
 <?php
 
 include "lib/_mysql.php";
+$dbtable=$data_table;
 
 function getUsrVal($username, $table, $want) {
     $getsql = "SELECT * FROM `" . $table . "`";
@@ -69,6 +70,6 @@ function authKey($usertable, $uuid, $pass) {
         if ($curUUID == $key)
             break;
     }
-    return ($pass == $currValue);
+    return (!($pass == $currValue));
 }
 ?>

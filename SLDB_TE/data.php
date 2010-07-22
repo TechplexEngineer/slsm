@@ -73,7 +73,7 @@ if ($reverse == "yes" || $reverse == "true" || $reverse == 1) {
 if (authKey($users_table, $key, $password)) {
     die("ERROR: NOT AUTHENTICATED");
 }
-
+//echo "breakpoint";
 if ($key == '' or (($fields == '') && ($reverse != true))) {
     die("ERROR: INSUFFICIENT KEY OR FIELDS");
 }
@@ -89,7 +89,7 @@ if ($separator == '') {
 
 $fields = explode($separator, $fields);
 $values = explode($separator, $values);
-echo "functions";
+//echo "functions";
 ######################################################################
 # FUNCTIONS
 #
@@ -117,16 +117,18 @@ function combine_arrays($varfields, $varvalues) {
 function update_data($table, $varkey, $data, $varverb) {
     foreach ($data as $f => $v) {
 
-        $sql = "UPDATE $table SET
-				value = '$v',
+        $sql = "UPDATE ".$table." SET
+				value = '".$v."',
 				timestamp = NOW()
-				WHERE uuid = '$varkey' AND field = '$f'";
-        $result = mysql_query($sql) or die("ERROR: SYNTAX " . mysql_error());
+				WHERE uuid = '".$varkey."' AND field = '".$f."'";
+        //echo $sql."<br>\n";
+
+        $result = mysql_query($sql) or die("ERROR: SYNTAX1 " . mysql_error());
 
         if (mysql_affected_rows() == 0) {
-            $sql = "INSERT INTO $table (uuid,field,value,timestamp) 
-					VALUES ('$varkey', '$f','$v',NOW())";
-            $result = mysql_query($sql) or die("ERROR: SYNTAX " . mysql_error());
+            $sql = "INSERT INTO ".$table." (uuid,field,value,timestamp)
+					VALUES ('".$varkey."', '".$f."','".$v."',NOW())";
+            $result = mysql_query($sql) or die("ERROR: SYNTAX2 " . mysql_error());
         }
     }
     if ($varverb == true) {
