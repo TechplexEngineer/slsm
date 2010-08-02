@@ -173,23 +173,26 @@ switch ($action)
         $texInfo = explode(',', $_REQUEST["tex"]);
         foreach ($texInfo as $id => $value)
         {
-            //echo $id ."\t \t" . $value . "\n";
+            echo $id ."\t \t" . $value . "\n";
             $newArray[] = explode('|', $value);
 
             $sql = "UPDATE otms_textures SET
-
-                                name =              '" . $newArray[$id][0] . "',
-                                host_server_uuid =  '" . $newArray[$id][1] . "',
-                                owner_uuid =        '" . $owneruuid . "',
-				WHERE uuid =        '" .  str_replace('-','_',$key) . "'";
-                                echo $sql;
-            $result = mysql_query($sql) or die("ERROR: Tex update: " . mysql_error());
-
-            if (mysql_affected_rows() == 0)
+                name =              '" . $newArray[$id][0] . "',
+                host_server_uuid =  '" . $newArray[$id][1] . "',
+                owner_uuid =        '" . $owneruuid . "',
+                WHERE uuid =        '" .  $key . "'";
+                                //echo "\n" . $sql;
+            $result = mysql_query($sql);
+            echo "\n rows:" . mysql_affected_rows();
+            if (!(mysql_affected_rows() >= 0))
             {
-                $query = "INSERT INTO otms_textures VALUES ('" . $newArray[$id][0] . "','" . $newArray[$id][1] . "', '" . $key . "', '" . $owneruuid . "' )";
+                echo " \n inserting \n ";
+                if(empty($newArray[$id][1]) || empty($newArray[$id][0]))
+                    echo "***ERROR: blank";
+                $query = "INSERT INTO otms_textures VALUES ('" . $newArray[$id][1] . "','" . $newArray[$id][0] . "', '" . $key . "', '" . $owneruuid . "' )";
                 //echo $query;
-                $result = mysql_query($query) or die("ERROR: Texture " . mysql_error());
+                $result = mysql_query($query); //or die("ERROR: Texture " . mysql_error());
+                echo "\n Result: " . $result . "\n" . "Error:" . mysql_error();
             }
         }
 
