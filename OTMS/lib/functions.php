@@ -5,6 +5,7 @@
 #
 # These do all the dirty work.
 ######################################################################
+
 // This function takes the two arrays taken in as parameters, and makes a new 2D array,
 // With each element in $varfields as the key for the corresponding element in $varvalues
 function combine_arrays($varfields, $varvalues) {
@@ -195,8 +196,8 @@ function delete_fields($table, $varkey, $data, $varverb) {
         return "SUCCESS: " . $rows;
 }
 
-function authorize($userstable, $user, $pass) {
-    if ($user) {  //if (the field has been filled)
+function authorized($userstable, $user, $pass) {
+    if ($user) { //if (the field has been filled)
 // username and password sent from form
         $myusername = $user;
         $mypassword = $pass;
@@ -213,25 +214,6 @@ function authorize($userstable, $user, $pass) {
 // If result matched $myusername and $mypassword,
 // one row would have been returned
         if (mysql_num_rows($result) == 1) {
-            $_SESSION['user'] = $myusername;
-            $_SESSION['pass'] = $mypassword;
-
-            $sql = "SELECT * FROM `" . $userstable . "` WHERE username='" . $myusername . "'";
-            $query = mysql_query($sql) or die(mysql_error());
-            $row = mysql_fetch_assoc($query);
-
-            $_SESSION['id'] = $row['id'];
-            $_SESSION['uuid'] = $row['uuid'];
-            $_SESSION['SL_first'] = $row['SL_first'];
-            $_SESSION['SL_last'] = $row['SL_last'];
-            $_SESSION['perms'] = $row['perms'];
-
-
-            $_SESSION['datatable'] = "sldb_data";
-            //$_SESSION['serverstable'] = "sls_servers";
-            $_SESSION['userstable'] = $userstable;
-            $_SESSION['version'] = $version;
-
             return true;
             //send the user to the page they should view upon successfull login
             //@todo it would be nice if they could go to the page they came from.
@@ -260,13 +242,10 @@ function authKey($usertable, $uuid, $pass) {
         if ($curUUID == $uuid)
             break;
     }
-    if ($pass == $currValue)
-    {
+    if ($pass == $currValue) {
         //echo "Auth Success";
         return true; //Yea authorized :)
-    }
-    else
-    {
+    } else {
         //return false;
         die("Authentication Failed");
     }

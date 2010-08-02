@@ -170,7 +170,8 @@ switch ($action)
         break;
     case 'tex':
 //        echo "Tex" . $_REQUEST["tex"];
-        $texInfo = explode(',', $_REQUEST["tex"]);
+        $texInfo = explode(',', substr($_REQUEST["tex"], 0, -1));
+        print_r($texInfo);
         foreach ($texInfo as $id => $value)
         {
             echo $id ."\t \t" . $value . "\n";
@@ -186,7 +187,7 @@ switch ($action)
             echo "\n rows:" . mysql_affected_rows();
             if (!(mysql_affected_rows() >= 0))
             {
-                echo " \n inserting \n ";
+                //echo " \n inserting \n ";
                 if(empty($newArray[$id][1]) || empty($newArray[$id][0]))
                     echo "***ERROR: blank";
                 $query = "INSERT INTO otms_textures VALUES ('" . $newArray[$id][1] . "','" . $newArray[$id][0] . "', '" . $key . "', '" . $owneruuid . "' )";
