@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-if (empty($_SESSION['user']))
-{
-    header("location:login.php");
-}
-include "lib/config.php";
-include "lib/vars.php";
+//if (empty($_SESSION['user']))
+//{
+//    header("location:login.php");
+//}
+include "../lib/config.php";
+include "../lib/vars.php";
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -19,7 +19,7 @@ include "lib/vars.php";
 
         <?php
         $textures = array();
-        $getsql = "SELECT * FROM `" . $textures_table . "` WHERE owner_uuid='" . $_SESSION['uuid'] . "' ";
+        $getsql = "SELECT * FROM `" . $textures_table . "` WHERE owner_uuid='7e6aba77-bf2c-41b5-8736-30f33ea563c7' ";
         $getqry = mysql_query($getsql) or die(mysql_error());
 //print_r($getqry);
         $omitted = 0;
