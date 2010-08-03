@@ -36,6 +36,7 @@ include "../lib/vars.php";
                         echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";  
                 }
                 $omitted++;
+                echo "<script> console.log(\" " .$row['name']." \");</script>";
             }
             else
                 echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
@@ -44,7 +45,7 @@ include "../lib/vars.php";
         }
 //print_r($textures);
         if ($omitted > 0)
-            echo "\n <br>" .$omitted. " Textures were omitted.";
+            echo "\n <br>" . $omitted ." of ". count($textures)." Textures were omitted.";
         ?>
     </body>
 </html>

@@ -23,28 +23,85 @@ include "lib/vars.php";
         $getqry = mysql_query($getsql) or die(mysql_error());
 //print_r($getqry);
         $omitted = 0;
-        $fast = true;
+
         while ($row = mysql_fetch_assoc($getqry))
         {
-            $ext = substr($row['name'], -3);
-            if ($ext == "tga" || $ext == "png")
+           if(empty($row['has_alpha_layers']))
             {
-                if (!$fast) // fas setting true, don't bother checking tga or png files
+                $str = file_get_contents("http://secondlife.com/app/image/" . $row['uuid'] . "/1");
+                if (empty($str))
+                { //no image present
+                    $omitted++;
+                    //echo "<script> console.log(\" " . $row['name'] . " \");</script>";
+                    $sql = "UPDATE " . $textures_table . " SET
+				has_alpha_layers = 'true'
+				WHERE uuid = '" . $row['uuid'] . "'";
+                    //echo "<br>\n".$sql."<br>\n";
+
+                    $result = mysql_query($sql) or die("ERROR:  " . mysql_error());
+                    //mark database
+                } else // image present
                 {
-                    $str = file_get_contents("http://secondlife.com/app/image/" . $row['uuid'] . "/1");
-                    if (!empty($str))
-                        echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";  
+                    echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+                    $sql = "UPDATE " . $textures_table . " SET
+				has_alpha_layers = 'false'
+				WHERE uuid = '" . $row['uuid'] . "'";
+                    //echo "<br>\n".$sql."<br>\n";
+
+                    $result = mysql_query($sql) or die("ERROR:  " . mysql_error());
+                    //mark database
                 }
-                $omitted++;
+            }else
+            {
+                //echo $row['has_alpha_layers'];
+                if($row['has_alpha_layers'] == "true")
+                    $omitted ++;
+                else
+                    echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+
             }
-            else
-                echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+
+
+
+//
+//
+//
+//
+//
+//            if ($row['has_alpha_layers'] == "false")
+//                echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+//            elseif (empty($row['has_alpha_layers']))
+//            {
+//                $str = file_get_contents("http://secondlife.com/app/image/" . $row['uuid'] . "/1");
+//                if (empty($str))
+//                {
+//                    $omitted++;
+//                    echo "<script> console.log(\" " . $row['name'] . " \");</script>";
+//                    $sql = "UPDATE " . $textures_table . " SET
+//				has_alpha_layers = 'false'
+//				WHERE uuid = '" . $row['uuid'] . "'";
+//                    echo "<br>\n".$sql."<br>\n";
+//
+//                    $result = mysql_query($sql) or die("ERROR:  " . mysql_error());
+//                    //mark database
+//                } else
+//                {
+//                    echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+//                    //mark database
+//                }
+//            } else if($row['has_alpha_layers'])
+//            {
+//                $omitted++;
+//                echo "<script> console.log(\" " . $row['name'] . " \");</script>";
+//            }
+//            else
+//                echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
 
             $textures[] = $row['uuid'];
         }
 //print_r($textures);
         if ($omitted > 0)
-            echo "\n <br>" .$omitted. " Textures were omitted.";
+            echo "\n <br>" . $omitted . " of " . count($textures) . " Textures were omitted.";
         ?>
     </body>
 </html>

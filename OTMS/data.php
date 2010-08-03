@@ -190,7 +190,7 @@ switch ($action)
                 //echo " \n inserting \n ";
                 if(empty($newArray[$id][1]) || empty($newArray[$id][0]))
                     echo "***ERROR: blank";
-                $query = "INSERT INTO otms_textures VALUES ('" . $newArray[$id][1] . "','" . $newArray[$id][0] . "', '" . $key . "', '" . $owneruuid . "' )";
+                $query = "INSERT INTO otms_textures VALUES ('" . $newArray[$id][1] . "','" . $newArray[$id][0] . "', '" . $key . "', '" . $owneruuid . "','' )";
                 //echo $query;
                 $result = mysql_query($query); //or die("ERROR: Texture " . mysql_error());
                 echo "\n Result: " . $result . "\n" . "Error:" . mysql_error();

@@ -44,7 +44,7 @@ include "../lib/vars.php";
         }
 //print_r($textures);
         if ($omitted > 0)
-            echo "\n <br>" . $omitted . " Textures were omitted.";
+            echo "\n <br>" . $omitted ." of ". count($textures). " Textures were omitted.";
         ?>
     </body>
 </html>
