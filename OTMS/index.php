@@ -7,6 +7,11 @@ if (empty($_SESSION['user']))
 }
 include "lib/config.php";
 include "lib/vars.php";
+
+ function displayImage($uuid , $size){
+     echo "<img src=\"http://secondlife.com/app/image/" . $uuid . "/". $size ."\" />";
+ }
+
 ?>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -23,12 +28,13 @@ include "lib/vars.php";
         $getqry = mysql_query($getsql) or die(mysql_error());
 //print_r($getqry);
         $omitted = 0;
+        $size =1;
 
         while ($row = mysql_fetch_assoc($getqry))
         {
            if(empty($row['has_alpha_layers']))
             {
-                $str = file_get_contents("http://secondlife.com/app/image/" . $row['uuid'] . "/1");
+                $str = file_get_contents("http://secondlife.com/app/image/" . $row['uuid'] . "/" .$size);
                 if (empty($str))
                 { //no image present
                     $omitted++;
@@ -42,7 +48,7 @@ include "lib/vars.php";
                     //mark database
                 } else // image present
                 {
-                    echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+                    displayImage($row['uuid'],$size);
                     $sql = "UPDATE " . $textures_table . " SET
 				has_alpha_layers = 'false'
 				WHERE uuid = '" . $row['uuid'] . "'";
@@ -57,7 +63,7 @@ include "lib/vars.php";
                 if($row['has_alpha_layers'] == "true")
                     $omitted ++;
                 else
-                    echo "<img src=\"http://secondlife.com/app/image/" . $row['uuid'] . "/1\" />";
+                    displayImage($row['uuid'],$size);
 
             }
 
