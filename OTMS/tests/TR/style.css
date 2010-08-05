@@ -1,0 +1,34 @@
+body {
+    margin:0;
+    padding:0
+}
+
+div#header {
+    clear:both;
+    height:50px;
+/*    background-color:aqua;*/
+    padding:5px
+}
+
+div#left {
+    float:left;
+    width:150px;
+    background-color:red
+}
+
+div#right {
+    float:right;
+    width:150px;
+    background-color:green
+}
+
+div#middle {
+    background-color:silver;
+    margin:0;
+    padding:0 160px 5px
+}
+
+div#footer {
+    clear:both;
+    background-color:#FF0
+}

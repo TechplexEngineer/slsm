@@ -12,7 +12,7 @@
                 //Larger thumbnail preview
 
                 $("div.thumb .imgc").hover(function() {
-                    $(this).append('<div id="curr"style="display:none;position:relative;left:-52px;margin-top:10px;border:0px solid black;width:256px;float:left;text-align:center;">HELLO</div>');
+                    
                     $(this).css({'z-index' : '10'}); /*Add a higher z-index value so this image stays on top*/
                     $(this).find('img').addClass("hover").stop() /* Add class of "hover", then stop animation queue buildup*/
                    
@@ -25,7 +25,8 @@
                         height: '192px', /* Set new height */
                         padding: '20px'
                     }, 200); /* this value of "200" is the speed of how fast/slow this hover animates */
-                    $(this).find('div').fadeIn();
+                    $(this).find('hover').append('<div id="curr"style="display:none;position:relative;left:-52px;margin-top:10px;border:0px solid black;width:256px;float:left;text-align:center;">HELLO</div>');
+                    $(this).find('curr').fadeIn();
                  
                 } , function() {
                     console.log("junk");
@@ -75,9 +76,9 @@
 
 
             </div>
-            <div id="main_view">
+<!--            <div id="main_view">
                 <a href="http://www.DesignBombs.com" title="Design Bombs - Web Gallery" target="_blank"><img src="main_image1.jpg" alt="" /></a><br />
-            </div>
+            </div>-->
         </div>
     </body>
 </html> 
