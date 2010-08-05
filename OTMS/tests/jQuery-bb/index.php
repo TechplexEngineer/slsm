@@ -9,18 +9,20 @@
         <script type="text/javascript" src="jq.hover.js"></script>
     </head>
     <body>
-        <!--        <div id="container">-->
-        <div id="file_tree">
-            File Tree
-        </div>
-
-        <div id="preview">
-            Preview
-        </div>
-        <div id ="thumbs">
-            Thumbs
-        </div>
-        <!--        </div>-->
+<!--        <div id="container">-->
+            <div id="file_tree">
+                <h3 id="file_tree">File Tree</h3>
+                <ul>
+                    <li>All Textures</li>
+                </ul>
+            </div>
+            <div id ="thumbs">
+                Thumbs
+            </div>
+            <div id="preview">
+                Preview
+            </div>
+<!--        </div>-->
 
     </body>
 </html>
