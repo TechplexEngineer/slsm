@@ -1,0 +1,141 @@
+/* Default Stylesheet */
+
+/** BODY ELEMENTS **/
+body {
+    color: #333;
+    background-color: #eee;
+}
+
+
+
+
+
+
+/** MAIN CONTAINERS **/
+div#container {
+    margin: 2em auto;
+}
+div#header {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div#header-in {
+    padding: 20px;
+}
+div#content-wrap {
+    padding: 10px 0;
+}
+div.content {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+
+    
+/*    float: left;*/
+    
+}
+div.content-in {
+    padding: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    width: inherit;
+    height: 600px;
+        overflow: scroll;
+}
+div.column {
+    width: 200px;
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div.column-in {
+    padding: 20px;
+}
+div#footer {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div#footer-in {
+    padding: 20px;
+}
+.imgcont
+{
+    margin: 0; padding: 5px;
+	float: left;
+	position: relative;
+	width: 70px;
+	height: 55px;
+}
+.imgcont img
+{
+    width: 60px; height: 45px;
+	border: 1px solid #ddd;
+	padding: 5px;
+	background: #f0f0f0;
+	position: absolute;
+	left: 0; top: 0;
+	-ms-interpolation-mode: bicubic;
+}
+
+.imgcont img.hover { /*This is what happens when the image is hovered*/
+/*	background:url(thumb_bg.png) no-repeat center center;*/
+/*	border: none;*/
+
+    border: 1px solid #ddd;
+}
+#curr
+{
+    display:none;
+    position:relative;
+    left:-52px;
+    margin-top:10px;
+    border:0px solid black;
+    width:256px;
+    float:left;
+    text-align:center;
+    z-index: 100;
+}
+
+
+
+
+/** SUB CONTAINERS **/
+* { }
+
+
+
+
+
+
+/** LISTS **/
+* { }
+
+
+
+
+
+
+/** TYPOGRAPHY **/
+* { }
+
+
+
+
+
+
+/** FORMS **/
+* { }
+
+
+
+
+
+
+/** END **/

@@ -1,0 +1,60 @@
+
+#container
+{
+    border-style:solid;
+    border-width:1px;
+    padding: 5px;
+    height: 100%;
+    position: relative;
+
+    /*    position: relative;*/
+}
+div#file_tree
+{
+    border-style:solid;
+    border-width:1px;
+    padding: 5px;
+    margin: 5px;
+
+    width: 15%;
+    float: left;
+}
+#thumbs
+{
+    border-style:solid;
+    border-width:1px;
+    padding: 5px;
+    margin-top: 5px;
+
+    width: 64%;
+    height: 95%;
+    float: left;
+    overflow: auto;
+    /*    display: block;*/
+}
+#preview
+{
+    border-style:solid;
+    border-width:1px;
+    padding: 5px;
+    margin: 5px;
+
+    float: left;
+    width: 15%;
+}
+ul, li {
+
+    margin-left: 10px;
+    /*    padding-left: 15px;*/
+    line-height:1em;
+}
+.imgcont {
+    border:1px solid #DDDDDD;
+    width: 70px;
+    height: 55px;
+    padding: 5px;
+}
+
+
+
+
