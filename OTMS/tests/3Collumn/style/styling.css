@@ -28,23 +28,28 @@ div#content-wrap {
     padding: 10px 0;
 }
 div.content {
-    color: inherit;
+/*    color: inherit;
     background-color: #fff;
     border: 1px solid #e5e5e5;
-    border-width: 0 2px 2px 0;
+    border-width: 0 2px 2px 0;*/
+margin:0 360px 0 210px;
 
     
 /*    float: left;*/
     
 }
 div.content-in {
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+
     padding: 20px;
     list-style: none;
     margin: 0;
-    padding: 10px;
+    padding: 20px;
     width: inherit;
     height: 600px;
-        overflow: scroll;
+        overflow: auto;
 }
 div.column {
     width: 200px;

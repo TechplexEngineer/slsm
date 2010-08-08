@@ -1,61 +1,65 @@
 /* Default Stylesheet */
 
-															/** BODY ELEMENTS **/
+/** BODY ELEMENTS **/
 body {
-	padding: 0 5%;
-	font-size: .75em;
-	text-align: center;
-	}
+    padding: 0 5%;
+    font-size: .75em;
+    text-align: center;
+}
 
 
 
 
 
 
-															/** MAIN CONTAINERS **/
+/** MAIN CONTAINERS **/
 div#container {
-	width: 700px;
-	margin: 0 auto;
-	text-align: left;
-	}
-	body.fullwidth div#container { width: 100%; }
-	div#header {
-		
-		}
-		div#header-in {
-			
-			}
-	div#content-wrap {
-		
-		}
-		div.content {
-			
-			}
-		div.rlcol div.content 	{ margin: 0 210px; }			/* three column */
-			div.content-in {
-				
-				}
-		div.column {
-			width: 200px;
-			}
-		div.rlcol div.cleft 	{ float: left; }				/* three column left */
-		div.rlcol div.cright 	{ float: right; }				/* three column right */
-			div.column-in {
-				
-				}
-	div#footer {
-		
-		}
-		div#footer-in {
-			
-			}
+    width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+body.fullwidth div#container { width: 100%; }
+div#header {
+
+}
+div#header-in {
+
+}
+div#content-wrap {
+
+}
+div.content {
+    width: 660px;
+}
+div.rlcol div.content 	{ margin: 0 210px; }			/* three column */
+div.content-in {
+
+}
+div.column {
+    width: 200px;
+}
+div.rlcol div.cleft 	{
+    float: left; }				/* three column left */
+div.rlcol div.cright 	{ 
+    float: right;
+    width: 360px;
+}				/* three column right */
+div.column-in {
+
+}
+div#footer {
+
+}
+div#footer-in {
+
+}
 
 
 
 
 
 
-															/** SUB CONTAINERS **/
+/** SUB CONTAINERS **/
 * { }
 
 
@@ -63,7 +67,7 @@ div#container {
 
 
 
-															/** LISTS **/
+/** LISTS **/
 * { }
 
 
@@ -71,7 +75,7 @@ div#container {
 
 
 
-															/** TYPOGRAPHY **/
+/** TYPOGRAPHY **/
 * { }
 
 
@@ -79,7 +83,7 @@ div#container {
 
 
 
-															/** FORMS **/
+/** FORMS **/
 * { }
 
 
@@ -87,4 +91,4 @@ div#container {
 
 
 
-															/** END **/
+/** END **/
