@@ -28,7 +28,7 @@ include "lib/vars.php";
         $getqry = mysql_query($getsql) or die(mysql_error());
 //print_r($getqry);
         $omitted = 0;
-        $size =1;
+        $size =3;
 
         while ($row = mysql_fetch_assoc($getqry))
         {
@@ -48,7 +48,7 @@ include "lib/vars.php";
                     //mark database
                 } else // image present
                 {
-                    displayImage($row['uuid'],$size);
+                    displayImage($row['uuid'],$size, $row['name']);
                     $sql = "UPDATE " . $textures_table . " SET
 				has_alpha_layers = 'false'
 				WHERE uuid = '" . $row['uuid'] . "'";
@@ -63,7 +63,7 @@ include "lib/vars.php";
                 if($row['has_alpha_layers'] == "true")
                     $omitted ++;
                 else
-                    displayImage($row['uuid'],$size);
+                    displayImage($row['uuid'], $size, $row['name']);
 
             }
 
