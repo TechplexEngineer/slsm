@@ -18,9 +18,7 @@ $(document).ready(function(){
             height: '192px', /* Set new height */
             padding: '10px'
         }, 200); /* this value of "200" is the speed of how fast/slow this hover animates */
-        //$(this).append('<div id="curr">HELLO</div>');
-        //$(this).find('curr').fadeIn();
-        $(this).addClass("curr");
+        $(this).addClass("curr"); //THis is so we can ref the curr hovered element
         //changes the image to a larger version for clarity
         var mainImage = $(this).find("img").attr("src");
         var uuid = mainImage.substring(32,68);
@@ -28,9 +26,6 @@ $(document).ready(function(){
         $(this).find('img').attr({
             src: "http://secondlife.com/app/image/" +uuid+ "/" +size 
         });
-
-        //$(this).innerHTML = "<img alt=\"\"  src=\"http://secondlife.com/app/image/" +uuid+ "/ " +size+ "\"/>";
-
     } , function() {
         
         $(this).find('img').removeClass("hover").stop()  /* Remove the "hover" class , then stop animation queue buildup*/
@@ -45,28 +40,17 @@ $(document).ready(function(){
         }, 400, function(){
             $(this).parent().parent().css({'z-index' : '0'})
         });
+        //Put back the small image
         var mainImage = $(this).find("img").attr("src");
         var uuid = mainImage.substring(32,68);
         var size = 3;
         $(this).find('img').attr({
             src: "http://secondlife.com/app/image/" +uuid+ "/" +size
         });
-//        var mainImage = $(this).find("img").attr("src");
-//        var uuid = mainImage.substring(32,68);
-//        var size = 3;
-//        $(this).innerHTML = "<img alt=\"\"  src=\"http://secondlife.com/app/image/" +uuid+ "/ " +size+ "\"/>";
         $(this).removeClass("curr");
-        //$("#curr").remove();
-    //$(this).attr({ src: uuid });
     });
 
-    //Swap Image on Click
-//    $("div.imgcont a").click(function() {
-//                console.log("click");
-//		var mainImage = $(this).attr("href"); //Find Image Name
-//		$("#main_view img").attr({ src: mainImage });
-//		return false;
-//	});
+    //Swap preview image on Click
 
     $("div.imgcont a").click(function() {
         console.log("click");
@@ -74,7 +58,7 @@ $(document).ready(function(){
         var uuid = mainImage.substring(32,68);
         var size = 2;
         document.getElementById("preview").innerHTML
-            = "Image name here"
+            = $(this).find("img").attr("alt")
             + "<img alt=\"\"  src=\"http://secondlife.com/app/image/" +uuid+ "/" +size+ "\"/>"
             + "<a href=\"send.php?uuid="+uuid+"\"> Send Me this texture </a>"
             + "<br> UUID: " + uuid;
@@ -82,30 +66,5 @@ $(document).ready(function(){
         return false;
     });
 
-//    $('#preview').click();
-//    function(){
-//
-//        console.log("send.php");
-//    }
-
-    //var mainImage = $(this).attr("href"); //get the name from the href of the image clicked
-//        $("#main_view img").attr({
-//            src: mainImage
-//        });//change the src of id main_view to the gotten
-//        var uuid = mainImage.substring(32,68);
-//        console.log(uuid);
-//        $("#main_view a").attr({
-//            href: uuid
-//        });
-
-
-
-
-
-//    $("#main_view a").click(function() {
-//
-//        alert();
-//        return false;
-//    });
 
 });

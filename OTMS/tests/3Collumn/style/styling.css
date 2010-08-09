@@ -32,7 +32,7 @@ div.content {
     background-color: #fff;
     border: 1px solid #e5e5e5;
     border-width: 0 2px 2px 0;*/
-margin:0 360px 0 210px;
+margin:0 350px 0 210px;
 
     
 /*    float: left;*/
@@ -43,10 +43,10 @@ div.content-in {
     border: 1px solid #e5e5e5;
     border-width: 0 2px 2px 0;
 
-    padding: 20px;
+    padding: 15px;
     list-style: none;
     margin: 0;
-    padding: 20px;
+
     width: inherit;
     height: 600px;
         overflow: auto;
@@ -59,7 +59,7 @@ div.column {
     border-width: 0 2px 2px 0;
 }
 div.column-in {
-    padding: 20px;
+    padding: 10px;
 }
 div#footer {
     color: inherit;
@@ -68,7 +68,7 @@ div#footer {
     border-width: 0 2px 2px 0;
 }
 div#footer-in {
-    padding: 20px;
+    padding:20px;
 }
 .imgcont
 {

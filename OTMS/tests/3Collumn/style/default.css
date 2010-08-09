@@ -29,9 +29,9 @@ div#content-wrap {
 
 }
 div.content {
-    width: 660px;
+/*    width: 660px;*/
 }
-div.rlcol div.content 	{ margin: 0 210px; }			/* three column */
+/*div.rlcol div.content 	{ margin: 0 210px; }			 three column */
 div.content-in {
 
 }
@@ -42,7 +42,7 @@ div.rlcol div.cleft 	{
     float: left; }				/* three column left */
 div.rlcol div.cright 	{ 
     float: right;
-    width: 360px;
+    width: 340px;
 }				/* three column right */
 div.column-in {
 
