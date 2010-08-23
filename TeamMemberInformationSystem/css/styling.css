@@ -1,0 +1,166 @@
+/* Default Stylesheet */
+
+/** BODY ELEMENTS **/
+body {
+    color: #333;
+    background-color: #eee;
+}
+
+
+
+
+
+
+/** MAIN CONTAINERS **/
+div#container {
+    margin: 2em auto;
+}
+div#header {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div#header-in {
+    padding: 20px;
+}
+div#content-wrap {
+    padding: 10px 0;
+    /*    margin-bottom: 10px;*/
+}
+div.content {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div.content-in {
+    padding: 20px;
+}
+div.column {
+    /*    width: 200px;*/
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+}
+div.column-in {
+    padding: 20px;
+}
+div.clear{
+    /*    margin-bottom: 15px;*/
+}
+
+div#footer {
+    color: inherit;
+    background-color: #fff;
+    border: 1px solid #e5e5e5;
+    border-width: 0 2px 2px 0;
+
+}
+div#footer-in {
+    padding: 20px;
+}
+
+
+
+
+
+
+/** SUB CONTAINERS **/
+
+th {
+    padding-right: 2.5px;
+    padding-left: 5px;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
+    vertical-align: middle;
+    font-style: normal;
+    /*    font-variant: small-caps;*/
+    background-color: #cccccc;
+    font-size: 12pt;
+}
+td {
+
+    padding-right: 2.5px;
+    padding-left: 2.5px;
+    padding-bottom: 2.5px;
+    padding-top: 2.5px;
+    vertical-align: middle;
+}
+
+
+
+
+
+
+/** LISTS **/
+* { }
+ul {
+
+    margin-left: 10px;
+
+}
+
+
+
+
+
+
+/** TYPOGRAPHY **/
+* { }
+
+
+
+
+
+
+/** FORMS **/
+* { }
+
+
+
+
+
+
+/** END **/
+
+/*The following is used in dashboard.php*/
+div.widget{
+    width: 24%;
+    float: left;
+
+/*    text-align: center;*/
+    border: 1px solid black;
+    padding: 10px;
+    margin: 15px;
+
+/*    margin-left:8px;
+    font-weight:400;*/
+    -moz-border-radius:11px;
+    -khtml-border-radius:11px;
+    -webkit-border-radius:11px;
+    border-radius:5px;
+    background:#fff;
+    border:2px solid #e5e5e5;
+    -moz-box-shadow:rgba(200,200,200,1) 0 4px 18px;
+    -webkit-box-shadow:rgba(200,200,200,1) 0 4px 18px;
+    -khtml-box-shadow:rgba(200,200,200,1) 0 4px 18px;
+    box-shadow:rgba(200,200,200,1) 0 4px 18px;
+/*    padding:16px 16px 40px;*/
+}
+div#disclaimer
+{
+    border: 1px dotted black;
+    font-size:10px;
+    background-color: #D7D7D7;
+}
+div.clear
+{
+    clear: both;
+}
+
+div#profilestats
+{
+    border:2px solid #FF9999;
+}
