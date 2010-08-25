@@ -1,15 +1,8 @@
-/* Default Stylesheet */
-
 /** BODY ELEMENTS **/
 body {
     color: #333;
     background-color: #eee;
 }
-
-
-
-
-
 
 /** MAIN CONTAINERS **/
 div#container {
@@ -47,9 +40,6 @@ div.column {
 div.column-in {
     padding: 20px;
 }
-div.clear{
-    /*    margin-bottom: 15px;*/
-}
 
 div#footer {
     color: inherit;
@@ -62,21 +52,16 @@ div#footer-in {
     padding: 20px;
 }
 
-
-
-
-
-
 /** SUB CONTAINERS **/
 
-th {
+/*th {
     padding-right: 2.5px;
     padding-left: 5px;
     padding-bottom: 2.5px;
     padding-top: 2.5px;
     vertical-align: middle;
     font-style: normal;
-    /*    font-variant: small-caps;*/
+        font-variant: small-caps;
     background-color: #cccccc;
     font-size: 12pt;
 }
@@ -87,53 +72,22 @@ td {
     padding-bottom: 2.5px;
     padding-top: 2.5px;
     vertical-align: middle;
-}
-
-
-
-
-
+}*/
 
 /** LISTS **/
-* { }
 ul {
-
     margin-left: 10px;
-
 }
-
-
-
-
-
-
-/** TYPOGRAPHY **/
-* { }
-
-
-
-
-
-
-/** FORMS **/
-* { }
-
-
-
-
-
-
-/** END **/
 
 /*The following is used in dashboard.php*/
 div.widget{
-    width: 24%;
+    width: 200px;
     float: left;
 
 /*    text-align: center;*/
     border: 1px solid black;
-    padding: 10px;
-    margin: 15px;
+    padding: 8px;
+    margin: 8px;
 
 /*    margin-left:8px;
     font-weight:400;*/
@@ -151,6 +105,7 @@ div.widget{
 }
 div#disclaimer
 {
+    margin-top: 10px;
     border: 1px dotted black;
     font-size:10px;
     background-color: #D7D7D7;
@@ -159,8 +114,16 @@ div.clear
 {
     clear: both;
 }
-
 div#profilestats
 {
     border:2px solid #FF9999;
+}
+div#cal
+{
+    width: 400px;
+    padding-bottom: 0px;
+}
+hr#hr1
+{
+    margin-bottom: 5px;
 }

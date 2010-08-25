@@ -1,49 +1,71 @@
 <?php
-echo "<h3>Register yourself here</h3>";
+
+include "lib/config.php";
+include "lib/vars.php";
 if(!empty($_REQUEST['fname']))
 {
+    session_start();
     //The form has been submitted
-    print_r($_REQUEST);
+    //print_r($_REQUEST);
+    $usrtype = "member";
+    $myusername = $_REQUEST['fname'].".".$_REQUEST['lname'];
+    $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`, `bio`, `bio_pend`, `nickname`, `location`, `roleonteam`, `yog`, `interests`, `favoritemoment`, `gainthisyear`, `futureplans`) VALUES (NULL, '".$_REQUEST['fname']."', '".$_REQUEST['lname']."', '".$myusername."', '".$_REQUEST['pass']."', '".$_REQUEST['email']."', '".$usrtype."', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+    $qry = mysql_query($sql) or die(mysql_error());
+
+    $sql = "SELECT * FROM `" . $login_table . "` WHERE user='" . $myusername . "'";
+    $query = mysql_query($sql) or die(mysql_error());
+
+    $row = mysql_fetch_assoc($query);
+    $_SESSION['user'] = $row['user'];
+    $_SESSION['pass'] = $row['pass'];
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['firstname'] = $row['firstname'];
+    $_SESSION['lastname'] = $row['lastname'];
+    $_SESSION['fullname'] = $row['firstname'] . " " . $row['lastname'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['type'] = $row['type'];
+    //print_r($_SESSION);
+    //session_destroy();
+    header("location:parts/success.php");
+    exit;
 }
+echo "<h3>Register yourself here</h3>";
 ?>
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script> 
-<!--<script src="js/common.js" type="text/javascript"></script>-->
-<script type="text/javascript" language="javascript">
+<script>
 $(document).ready(function() {
  $("#register").validationEngine()
-});
-console.log
+}) 
 </script>
-<p><a href="#" onclick="alert($('#formID').validationEngine({returnIsValid:true}))">Return true or false without binding anything</a> |
-		<a href="#" onclick="$.validationEngine.buildPrompt('#formID','This is an example','error')">Build a prompt on a div</a> |
-		<a href="#" onclick="$.validationEngine.loadValidation('#date')">Load validation date</a> |
-		<a href="#" onclick="$.validationEngine.closePrompt('.formError',true)">Close all prompt</a></p> 
-<form id="register" name="register" method="get" action="">
+<form id="register" name="register" method="post" action="register.php">
     <table>
         <tr>
             <td><label for="fname">Hello, My first name is:</label><td>
-            <td><input type="text" class="validate[required,custom[onlyLetter],length[0,100]]" name="fname" /><td>
+            <td><input type="text" id="fname" class="validate[required,custom[onlyLetter],length[0,100]]" name="fname" /><td>
         </tr>
         <tr>
             <td><label for="lname">Hello, My last name is:</label><td>
-            <td><input type="text" class="validate[required,custom[onlyLetter],length[0,100]]" name="lname" /><td>
+            <td><input type="text" id="lname" class="validate[required,custom[onlyLetter],length[0,100]]" name="lname" /><td>
+<!--                onBlur="makeUname(this.form)"-->
+        </tr>
+        <tr>
+            <td><label for="uname">My username will be:</label><td>
+            <td><input type="text" readonly="readonly" id="uname"  name="uname" /><td>
         </tr>
         <tr>
             <td><label for="pass">I want my password to be:</label><td>
-            <td><input type="password" class="validate[required,length[6,20]] text-input"name="pass"/> <!--onblur="passMatch(this.form);"--><td>
+            <td><input type="password" id="pass" class="validate[required,length[6,20]] text-input" name="pass"/> <!--onblur="passMatch(this.form);"--><td>
         </tr>
         <tr>
             <td><label for="pass2">I am sure my password is:</label><td>
-           <td><input id="pass2" type="password" class="validate[required,confirm[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
+           <td><input id="pass2" type="password" class="validate[required,confirmPass[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
         </tr>
         <tr>
             <td><label for="email">My email address is:</label><td>
-            <td><input type="text" class="validate[required,custom[email]] text-input" name="email" /><td>
+            <td><input type="text" id="e1"class="validate[required,custom[email]] text-input" name="email" /><td>
         </tr>
         <tr>
             <td><label for="email2">I am sure my email address is:</label><td>
-            <td><input type="text" class="validate[required,confirm[email]] text-input" name="email2" /><td>
+            <td><input type="text" id="e2"class="validate[required,confirmEmail[e1]] text-input" name="email2" /><td>
         </tr>
 <!--        <tr>
             <td><label for="nickname">But I prefer to be called:</label><td>
@@ -95,5 +117,5 @@ console.log
         </tr>-->
     </table>
     <?php include "lib/disclaimer.php";?>
-    <br><input type="submit" name="Submit" value="I Agree, Create My account">
+    <br><input type="submit" id="submit" name="Submit" value="I Agree, Create My account">
 </form>
