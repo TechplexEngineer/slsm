@@ -12,28 +12,11 @@ div#container {
     margin: 0 auto;
     text-align: left;
 }
-body.fullwidth div#container { 
-    width: 100%;
-}
-div#header {
-
-}
-div#header-in {
-
-}
-div#content-wrap {
-
-}
-div.content {
-
-}
 /* left column */
 div.lcol div.content {
     margin: 0 0 0 210px;
 }		
-div.content-in {
 
-}
 div.clear{
     text-align: center;
 }
@@ -45,51 +28,4 @@ div.column {
 div.lcol div.column {
     float: left;
 }				
-div.column-in {
 
-}
-div#footer {
-
-}
-div#footer-in {
-
-}
-
-
-
-
-
-
-/** SUB CONTAINERS **/
-* { }
-
-
-
-
-
-
-/** LISTS **/
-* { }
-
-
-
-
-
-
-/** TYPOGRAPHY **/
-* { }
-
-
-
-
-
-
-/** FORMS **/
-* { }
-
-
-
-
-
-
-/** END **/

@@ -17,7 +17,7 @@ include "lib/hours.php";
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
-        <title> SLSMS | TE's edition </title>
+        <title><?php echo $title; ?></title>
 
         <!-- Javascript - Fix the flash of unstyled content -->
         <script type="text/javascript"></script>
@@ -27,13 +27,12 @@ include "lib/hours.php";
         <link href="css/default.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/styling.css" rel="stylesheet" type="text/css" media="screen" />
 
-        <!-- Validator -->
+<!--        Validation-->
         <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
-        <script src="js/jquery.js" type="text/javascript"></script>
-        <script src="js/jquery.validationEngine-en.js" type="text/javascript"></script>
-        <script src="js/jquery.validationEngine.js" type="text/javascript"></script>
-
-
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/jquery.validationEngine-en.js" type="text/javascript"></script>
+<script src="js/jquery.validationEngine.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
 
 
         <!-- Meta Information -->
@@ -66,7 +65,7 @@ include "lib/hours.php";
                         elseif (file_exists($page))
                             include $page;
                         else
-                            echo"ERROR 404: file '" . $page . "' could not be found";
+                            echo"ERROR 404: file '" . $page . "' could not be found <br/><br/><br/><br/><br/><br/><br/><br/>";
                         ?>
                     </div><!-- end .content-in -->
                 </div> <!-- end .content -->

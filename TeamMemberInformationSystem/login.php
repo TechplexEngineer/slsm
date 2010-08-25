@@ -33,21 +33,20 @@ if (authorized($login_table, $myusername, $mypassword))
     $row = mysql_fetch_assoc($query);
     //print_r ($row);
 
-    $_SESSION['id']         = $row['id'];
-    $_SESSION['firstname']  = $row['firstname'];
-    $_SESSION['lastname']   = $row['lastname'];
-    $_SESSION['fullname']   = $row['firstname'] . " " .$row['lastname'];
-    $_SESSION['email']      = $row['email'];
-    $_SESSION['type']       = $row['type'];
-    $_SESSION['bio']        = $row['bio'];
-    $_SESSION['bio_pend']   = $row['bio_pend'];
-    $_SESSION['fhours']     = getHours($_SESSION['firstname']. " " .$_SESSION['lastname'], 1);
-    $_SESSION['fdollars']   = getHours($_SESSION['firstname']. " " .$_SESSION['lastname'], 2);
-    $_SESSION['cchours']    = getHours($_SESSION['firstname']. " " .$_SESSION['lastname'], 3);
-    $_SESSION['bhours']     = getHours($_SESSION['firstname']. " " .$_SESSION['lastname'], 4);
-    
-//$_SESSION['datatable'] = "sldb_data";
+    $_SESSION['id'] = $row['id'];
+    $_SESSION['firstname'] = $row['firstname'];
+    $_SESSION['lastname'] = $row['lastname'];
+    $_SESSION['fullname'] = $row['firstname'] . " " . $row['lastname'];
+    $_SESSION['email'] = $row['email'];
+    $_SESSION['type'] = $row['type'];
+    $_SESSION['bio'] = $row['bio'];
+    $_SESSION['bio_pend'] = $row['bio_pend'];
+//    $_SESSION['fhours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 1);
+//    $_SESSION['fdollars'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 2);
+//    $_SESSION['cchours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 3);
+//    $_SESSION['bhours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 4);
 
+//$_SESSION['datatable'] = "sldb_data";
     //print_r($_SESSION);
     header("location:index.php" . $page);
 } else
@@ -59,35 +58,36 @@ if (authorized($login_table, $myusername, $mypassword))
     //else the user has not submitted the form
 }
 ?>
-
+<script src="js/jquery.js" type="text/javascript"></script>
+<script src="js/common.js" type="text/javascript"></script>
 <title><?php echo $title; ?></title>
 
 <center><h2> <?php echo $sysname; ?> </h2></center>
-<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-    <tr>
-    <form name="form1" method="post" action="login.php<? echo $page; ?>">
-        <td>
-            <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-                <tr>
-                    <td colspan="3"><strong>Login: </strong></td>
-                </tr>
-                <tr>
-                    <td width="78">Username</td>
-                    <td width="6">:</td>
-                    <td width="294"><input name="myusername" type="text" id="myusername"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td>:</td>
-                    <td><input name="mypassword" type="password" id="mypassword"></td>
-                </tr>
-                <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value="Login"></td>
-                </tr>
-            </table>
-        </td>
-    </form>
-</tr>
-</table>
+<form name="form1" method="post" action="login.php<? echo $page; ?>">
+    <table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
+        <tr>
+            <td>
+                <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+                    <tr>
+                        <td colspan="3"><strong>Login: </strong></td>
+                    </tr>
+                    <tr>
+                        <td width="78">Username</td>
+                        <td width="6">:</td>
+                        <td width="294"><input name="myusername" type="text" id="myusername"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td>:</td>
+                        <td><input name="mypassword" type="password" id="mypassword"></td>
+                    </tr>
+                    <tr>
+                        <td> &nbsp; <a href="" onclick="passHelp()">Help</a></td>
+                        <td>&nbsp;</td>
+                        <td><input type="submit" name="Submit" value="Login"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</form>
