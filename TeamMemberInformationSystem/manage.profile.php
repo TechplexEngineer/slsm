@@ -1,5 +1,8 @@
 <?php
-
+if (empty($_SESSION['user'])) //check this code!!1
+{
+    exit;
+}
 $sql = "SELECT * FROM `pending_profile` WHERE id ='" .$_SESSION['id']."'";
 $qry = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($qry);

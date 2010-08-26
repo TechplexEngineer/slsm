@@ -5,6 +5,12 @@ if (empty($_SESSION['user']))
 {
     header("location:login.php?page=" . $_GET['page']);
 }
+if ($_SESSION['user'] == "register")
+{
+    $page = "register";
+}
+else
+    $page = $_REQUEST['page'];
 //include"lib/_mysql.php";
 include "lib/config.php";
 include "lib/vars.php";
@@ -57,7 +63,7 @@ include "lib/hours.php";
                 <div class="content">
                     <div class="content-in">
                         <?php
-                        $page = $_REQUEST['page'];
+                        
                         if (empty($page))
                             include "parts/dashboard.php";
                         elseif (file_exists($page . ".php"))

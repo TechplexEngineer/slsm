@@ -57,6 +57,8 @@ if (authorized($login_table, $myusername, $mypassword))
 //        die ("Username Blank");
     //else the user has not submitted the form
 }
+if($loginsDisabled)
+    die("Sorry We can't accept any logins at this time");
 ?>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>

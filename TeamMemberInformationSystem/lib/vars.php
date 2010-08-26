@@ -4,12 +4,14 @@ $login_table = "tims_users";
 //$textures_table = "otms_textures";
 
 $version = "v1.0";
-$name = "TIMS";
-$title = $name ." ". $version;
+$shortname = "TIMS";
+$title = $shortname ." ". $version;
 $sysname = "Team Information Management System";
 $purpose ="Web Database Application for Team Profile Management";
 $year = "2010";
+$sysurl = "techwizworld.net"."/".$shortname;
 
 $salt = "26548teamILR";
 
+$loginsDisabled = true;
 ?>
