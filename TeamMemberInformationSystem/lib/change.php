@@ -15,15 +15,22 @@ if ($form == "profile")
             . "(`id`, `nickname`, `location`, `role`, `yog`, `interests`, `favMoment`, `gainThisYr`, `futurePlans`, `bio`) \n"
             . "VALUES ('" . $_SESSION['id'] . "', '" . $_REQUEST['nickname'] . "', '" . $_REQUEST['town'] . "', '" . $_REQUEST['role'] . "', '" . $_REQUEST['yog'] . "', '" . $_REQUEST['interests'] . "', '" . $_REQUEST['fav_moment'] . "', '" . $_REQUEST['gain'] . "', '" . $_REQUEST['future'] . "', '" . $_REQUEST['bio'] . "')\n"
             . "ON DUPLICATE KEY UPDATE nickname ='" . $_REQUEST['nickname'] . "', location='" . $_REQUEST['town'] . "', role= '" . $_REQUEST['role'] . "', yog='" . $_REQUEST['yog'] . "1" . "', interests='" . $_REQUEST['interests'] . "', favMoment='" . $_REQUEST['fav_moment'] . "', gainThisYr='" . $_REQUEST['gain'] . "', futurePlans='" . $_REQUEST['future'] . "', bio='" . $_REQUEST['bio'] . "'\n";
-
-//echo $sql . "\n\n\n";
     $qry = mysql_query($sql) or die(mysql_error());
-//$row = mysql_fetch_assoc($qry);
-//echo "Your changes have been saved, they will not go live until reviewed by a moderator";
+
 //should overlay this
 //http://flowplayer.org/tools/overlay/index.html
-
-    //send mail to missluce(eventual) and me
+//
+    //send mail to missluce(eventualy) and me
+    $to = "get blake's email";
+    $to = "get jluce's email";
+    $subject = "Moderation Needed";
+    $body = "Your account was successfully created on " . $shortname . ".\n" .
+            "Your username is " . $_SESSION['user'] . "\n\n" .
+            "In order to login please visit:\n" .
+            $sysurl . "\n\n\n" .
+            "Best," .
+            "Blake";
+    timsMail($to, $subject, $body);
 }
 ?>
 <link href="../css/styling.css" rel="stylesheet" type="text/css" media="screen" />

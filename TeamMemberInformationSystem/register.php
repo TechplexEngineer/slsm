@@ -1,15 +1,15 @@
 <?php
-
 include "lib/config.php";
 include "lib/vars.php";
-if(!empty($_REQUEST['fname']))
+include "lib/mail.php";
+if (!empty($_REQUEST['fname']))
 {
     session_start();
     //The form has been submitted
     //print_r($_REQUEST);
     $usrtype = "member";
-    $myusername = $_REQUEST['fname'].".".$_REQUEST['lname'];
-    $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`, `bio`, `bio_pend`, `nickname`, `location`, `roleonteam`, `yog`, `interests`, `favoritemoment`, `gainthisyear`, `futureplans`) VALUES (NULL, '".$_REQUEST['fname']."', '".$_REQUEST['lname']."', '".$myusername."', '".$_REQUEST['pass']."', '".$_REQUEST['email']."', '".$usrtype."', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+    $myusername = $_REQUEST['fname'] . "." . $_REQUEST['lname'];
+    $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`) VALUES (NULL, '" . $_REQUEST['fname'] . "', '" . $_REQUEST['lname'] . "', '" . $myusername . "', '" . $_REQUEST['pass'] . "', '" . $_REQUEST['email'] . "', '" . $usrtype . "')";
     $qry = mysql_query($sql) or die(mysql_error());
 
     $sql = "SELECT * FROM `" . $login_table . "` WHERE user='" . $myusername . "'";
@@ -26,15 +26,19 @@ if(!empty($_REQUEST['fname']))
     $_SESSION['type'] = $row['type'];
     //print_r($_SESSION);
     //session_destroy();
-    header("location:parts/success.php");
+    
+    header("location:lib/success.php");
     exit;
+} else if ($_SESSION['user'] != "register")
+{
+    header("location:./");
 }
 echo "<h3>Register yourself here</h3>";
 ?>
 <script>
-$(document).ready(function() {
- $("#register").validationEngine()
-}) 
+    $(document).ready(function() {
+        $("#register").validationEngine()
+    })
 </script>
 <form id="register" name="register" method="post" action="register.php">
     <table>
@@ -45,7 +49,7 @@ $(document).ready(function() {
         <tr>
             <td><label for="lname">Hello, My last name is:</label><td>
             <td><input type="text" id="lname" class="validate[required,custom[onlyLetter],length[0,100]]" name="lname" /><td>
-<!--                onBlur="makeUname(this.form)"-->
+                <!--                onBlur="makeUname(this.form)"-->
         </tr>
         <tr>
             <td><label for="uname">My username will be:</label><td>
@@ -57,7 +61,7 @@ $(document).ready(function() {
         </tr>
         <tr>
             <td><label for="pass2">I am sure my password is:</label><td>
-           <td><input id="pass2" type="password" class="validate[required,confirmPass[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
+            <td><input id="pass2" type="password" class="validate[required,confirmPass[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
         </tr>
         <tr>
             <td><label for="email">My email address is:</label><td>
@@ -116,6 +120,6 @@ $(document).ready(function() {
             <td><input type="text" name="passTime" /><td>
         </tr>-->
     </table>
-    <?php include "lib/disclaimer.php";?>
+<?php include "lib/disclaimer.php"; ?>
     <br><input type="submit" id="submit" name="Submit" value="I Agree, Create My account">
 </form>
