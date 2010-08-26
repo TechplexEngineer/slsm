@@ -7,6 +7,30 @@ if (!empty($_REQUEST['fname']))
     session_start();
     //The form has been submitted
     //print_r($_REQUEST);
+    $error = false;
+    if($_REQUEST['pass'] != $_REQUEST['pass2'])
+    {
+        $error = true;
+        echo ("Your passwords do not match");
+    }
+    if ($_REQUEST['email'] != $_REQUEST['email2'])
+    {
+        $error = true;
+        echo ("Your emails do not match");
+    }
+    if (!preg_match('%^[A-Za-z]+$%', $_REQUEST['fname']) || is_numeric($_REQUEST['fname']) )
+    {
+        $error = true;
+        echo ("Your name may only contain letters");
+    }
+    if (!preg_match('%^[A-Za-z]+$%', $_REQUEST['lname']) || is_numeric($_REQUEST['lname']) )
+    {
+        $error = true;
+        echo ("Your name may only contain letters");
+    }
+    if($error)
+        exit;
+    
     $usrtype = "member";
     $myusername = $_REQUEST['fname'] . "." . $_REQUEST['lname'];
     $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`) VALUES (NULL, '" . $_REQUEST['fname'] . "', '" . $_REQUEST['lname'] . "', '" . $myusername . "', '" . $_REQUEST['pass'] . "', '" . $_REQUEST['email'] . "', '" . $usrtype . "')";
