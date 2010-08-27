@@ -5,12 +5,19 @@ if (empty($_SESSION['user']))
 {
     header("location:login.php?page=" . $_GET['page']);
 }
+
 if ($_SESSION['user'] == "register")
 {
     $page = "register";
-}
-else
+} else if ($_GET['page'] == "register")
+{
+    $page = "";
+    $_GET['page'] = "";
+    header("location: ./");
+} else
+{
     $page = $_REQUEST['page'];
+}
 //include"lib/_mysql.php";
 include "lib/config.php";
 include "lib/vars.php";
@@ -33,12 +40,11 @@ include "lib/hours.php";
         <link href="css/default.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="css/styling.css" rel="stylesheet" type="text/css" media="screen" />
 
-<!--        Validation-->
+        <!--        Validation-->
         <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
-<script src="js/jquery.js" type="text/javascript"></script>
-<script src="js/jquery.validationEngine-en.js" type="text/javascript"></script>
-<script src="js/jquery.validationEngine.js" type="text/javascript"></script>
-<script src="js/common.js" type="text/javascript"></script>
+        <script src="js/jquery.js" type="text/javascript"></script>
+
+        <script src="js/common.js" type="text/javascript"></script>
 
 
         <!-- Meta Information -->
@@ -51,34 +57,37 @@ include "lib/hours.php";
         <div id="container">
             <div id="header">
                 <div id="header-in">
-                    <?php include "parts/header.php" ?>
+<?php include "parts/header.php" ?>
                 </div> <!-- end #header-in -->
             </div> <!-- end #header -->
             <div id="content-wrap" class="clear lcol">
                 <div class="column">
                     <div class="column-in">
-                        <?php include "parts/navigation.php"; ?>
+<?php include "parts/navigation.php"; ?>
                     </div>
                 </div>
                 <div class="content">
                     <div class="content-in">
-                        <?php
-                        
-                        if (empty($page))
-                            include "parts/dashboard.php";
-                        elseif (file_exists($page . ".php"))
-                            include $page . ".php";
-                        elseif (file_exists($page))
-                            include $page;
-                        else
-                            echo"ERROR 404: file '" . $page . "' could not be found <br/><br/><br/><br/><br/><br/><br/><br/>";
-                        ?>
+
+<?php
+include "lib/io.php";
+
+
+if (empty($page))
+    include "parts/dashboard.php";
+elseif (file_exists($page . ".php"))
+    include $page . ".php";
+elseif (file_exists($page))
+    include $page;
+else
+    echo"ERROR 404: file '" . $page . "' could not be found <br/><br/><br/><br/><br/><br/><br/><br/>";
+?>
                     </div><!-- end .content-in -->
                 </div> <!-- end .content -->
             </div> <!-- end #content-wrap -->
             <div id="footer">
                 <div id="footer-in">
-                    <?php include"parts/footer.php" ?>
+<?php include"parts/footer.php" ?>
                 </div> <!-- end #footer-in -->
             </div> <!-- end #footer -->
         </div> <!-- end div#container -->

@@ -172,19 +172,19 @@
                         caller = $("input[name='"+groupname+"']");
                         break;
                     case "confirm":
-                                console.log("confirm " +caller+ " "+rules+ " " +i );
+                        console.log("confirm " +caller+ " "+rules+ " " +i );
                         _confirm(caller,rules,i);
                         break;
-                        case "confirm":
-                                console.log("confirm " +caller+ " "+rules+ " " +i );
+                    case "confirm":
+                        console.log("confirm " +caller+ " "+rules+ " " +i );
                         _confirm(caller,rules,i);
                         break;
-                        case "confirmEmail":
-                                console.log("confirm email");
+                    case "confirmEmail":
+                        console.log("confirm email");
                         _confirm1(caller,rules,i,"confirmEmail");
                         break;
-                        case "confirmPass":
-                                console.log("confirm pass");
+                    case "confirmPass":
+                        console.log("confirm pass");
                         _confirm1(caller,rules,i,"confirmPass");
                         break;
                     case "funcCall":
@@ -352,7 +352,7 @@
                                 $.validationEngine.ajaxValid = true;
                                 if(!customAjaxRule)	{
                                     $.validationEngine.debug("wrong ajax response, are you on a server or in xampp? if not delete de ajax[ajaxUser] validating rule from your form ")
-                                    }
+                                }
                                 if($.validationEngine.settings.allrules[customAjaxRule].alertTextOk){	// NO OK TEXT MEAN CLOSE PROMPT
                                     $.validationEngine.updatePromptText(ajaxCaller,$.validationEngine.settings.allrules[customAjaxRule].alertTextOk,"pass",true);
                                 }else{
@@ -564,17 +564,17 @@
                 $(updateThisPrompt).addClass("greenPopup")
             }else{
                 $(updateThisPrompt).removeClass("greenPopup")
-                };
+            };
             if(type == "load") {
                 $(updateThisPrompt).addClass("blackPopup")
             }else{
                 $(updateThisPrompt).removeClass("blackPopup")
-                };
+            };
             if(ajaxed) {
                 $(updateThisPrompt).addClass("ajaxed")
             }else{
                 $(updateThisPrompt).removeClass("ajaxed")
-                };
+            };
 	
             $(updateThisPrompt).find(".formErrorContent").html(promptText);
 		
@@ -654,7 +654,7 @@
             }
             if(typeof(ajaxValidate)=='undefined'){
                 ajaxValidate = false
-                }
+            }
             if(!ajaxValidate){
                 linkTofield = $.validationEngine.linkTofield(caller);
                 closingPrompt = "."+linkTofield;

@@ -73,19 +73,46 @@ function ajaxStats(fullname)
         url: "lib/dashboard.stats.php?name="+fullname,
         cache: false,
         success: function(html){
-//            console.log(html);
+            //            console.log(html);
             document.getElementById("stats").innerHTML = html;
-//            var pieces = html.split("|");
-//            var fhours = pieces[0].substr(3, pieces[0].length);
-//            var fdollars = pieces[1].substr(3, pieces[0].length);
-//            var cchours = pieces[2].substr(3, pieces[0].length);
-//            var bhours = pieces[3].substr(3, pieces[0].length);
+        //            var pieces = html.split("|");
+        //            var fhours = pieces[0].substr(3, pieces[0].length);
+        //            var fdollars = pieces[1].substr(3, pieces[0].length);
+        //            var cchours = pieces[2].substr(3, pieces[0].length);
+        //            var bhours = pieces[3].substr(3, pieces[0].length);
 
 
 
         }
     });
 // make php file with these as get params, then return its outpt,
-            // inner html replace
+// inner html replace
+
+}
+
+function login()
+{
+    console.log("logintoggle");
+    $.ajax({
+        url: "lib/io.php?name=cblogin&val="+document.controlsForm.loginbox.checked,
+        cache: false,
+        success: function(html){
+            console.log(html);
+        }
+    });
+
+}
+//document.controlsForm.loginbox
+//document.controlsForm.regbox
+function reg()
+{
+    console.log("regtoggle");
+    $.ajax({
+        url: "lib/io.php?name=cbreg&val="+document.controlsForm.regbox.checked,
+        cache: false,
+        success: function(html){
+            console.log(html);
+        }
+    });
 
 }

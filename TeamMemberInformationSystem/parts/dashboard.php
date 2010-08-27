@@ -33,8 +33,7 @@ if ($_SESSION['type'] == "member")
         echo "Loading Stats...";
         echo "<img alt=\"Loading Stats\"  src=\"img/ajax-loader.gif\"/>";
         echo "</div>";
-    }
-    else
+    } else
     {
         echo "<div id=\"stats\" class=\"widget\">";
         include "lib/dashboard.stats.php";
@@ -42,6 +41,24 @@ if ($_SESSION['type'] == "member")
         //echo $_SESSION['fhrs'];
         echo "</div>";
     }
+}
+
+if ($_SESSION['id'] == "1") // It it blake?
+{
+    echo "<div id=\"logins\" class=\"widget\">";
+    echo "<form name=\"controlsForm\">";
+    if($loginsDisabled)
+        $cblogin = "checked=\"yes\"";
+    else
+        $cblogin = "";
+    echo "<input id=\"cblogin\" type=\"checkbox\" name=\"loginbox\" ".$cblogin." onClick=\"login()\"/> Disable Login<br />";
+    if($registrationDisabled)
+        $cbreg = "checked=\"yes\"";
+    else
+        $cbreg = "";
+    echo "<input id=\"cbreg\" type=\"checkbox\" name=\"regbox\" ".$cbreg." onClick=\"reg()\"/> Disable Registration<br />";
+    echo "</form>";
+    echo "</div>";
 }
 ?>
 

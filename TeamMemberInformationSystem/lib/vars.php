@@ -13,5 +13,8 @@ $sysurl = "techwizworld.net"."/".$shortname;
 
 $salt = "26548teamILR";
 
-$loginsDisabled = true;
+$loginsDisabled = false;
+$registrationDisabled = false;
+global $bypassed;
+$bypassed = false;
 ?>
