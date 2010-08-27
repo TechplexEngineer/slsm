@@ -7,6 +7,11 @@ if (empty($form))
 {
     die("I'm Sorry, Something went wrong");
 }
+
+
+
+
+
 if ($form == "profile")
 {//public profile
     //print_r($_REQUEST);
@@ -32,6 +37,7 @@ if ($form == "profile")
             "Blake";
     timsMail($to, $subject, $body);
 }
+
 ?>
 <link href="../css/styling.css" rel="stylesheet" type="text/css" media="screen" />
 <div class ="widget" style="width:350px">

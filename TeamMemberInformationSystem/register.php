@@ -1,35 +1,58 @@
 <?php
+session_start();
 include "lib/config.php";
 include "lib/vars.php";
 include "lib/mail.php";
+include "lib/io.php";
+
+if($registrationDisabled)
+    die("I'm Sorry we are not acepting new registrations.");
+
 if (!empty($_REQUEST['fname']))
 {
-    session_start();
+    
     //The form has been submitted
     //print_r($_REQUEST);
     $error = false;
     if($_REQUEST['pass'] != $_REQUEST['pass2'])
     {
         $error = true;
-        echo ("Your passwords do not match");
+        echo ("Your passwords do not match\n<br/>");
     }
-    if ($_REQUEST['email'] != $_REQUEST['email2'])
+    if(strlen($_REQUEST['pass']) >= 6 && strlen($_REQUEST['pass']) <= 20)
     {
         $error = true;
-        echo ("Your emails do not match");
+        echo ("Your password must have at least 6 characters, and no more than 20\n<br/>");
     }
+
+    if ($_REQUEST['email'] != $_REQUEST['email2'])
+    {
+
+        $error = true;
+        echo ("Your emails do not match\n<br/>");
+    }
+    if(strlen($_REQUEST['email']) >= 0 && preg_match('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$', $_REQUEST['email']))
+    {
+        $error = true;
+        echo "Please enter a valid Email address";
+    }
+
     if (!preg_match('%^[A-Za-z]+$%', $_REQUEST['fname']) || is_numeric($_REQUEST['fname']) )
     {
         $error = true;
-        echo ("Your name may only contain letters");
+        echo ("Your name may only contain letters\n<br/>");
     }
     if (!preg_match('%^[A-Za-z]+$%', $_REQUEST['lname']) || is_numeric($_REQUEST['lname']) )
     {
         $error = true;
-        echo ("Your name may only contain letters");
+        echo ("Your name may only contain letters\n<br/>");
     }
     if($error)
+    {
+        echo "<br/><strong>Please go back and fix the errors above.</strong>";
         exit;
+    }
+    //http://www.position-absolute.com/articles/jquery-form-validator-because-form-validation-is-a-mess/
     
     $usrtype = "member";
     $myusername = $_REQUEST['fname'] . "." . $_REQUEST['lname'];
@@ -53,22 +76,28 @@ if (!empty($_REQUEST['fname']))
     
     header("location:lib/success.php");
     exit;
-} else if ($_SESSION['user'] != "register")
-{
-    header("location:./");
-}
+} else
+//    if ($_SESSION['user'] != "register")
+//{
+//    header("location:./");
+//}
 echo "<h3>Register yourself here</h3>";
 ?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
+<script src="js/jq.ve-en.js" type="text/javascript"></script>
+<!--<script src="js/jquery.validationEngine.js" type="text/javascript"></script>-->
+<script src="js/jq.ve.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
-        $("#register").validationEngine()
+        $("#formID").validationEngine()
     })
 </script>
-<form id="register" name="register" method="post" action="register.php">
+<a href="#" onclick="$.validationEngine.buildPrompt('#register','This is an example','error')">Build a prompt on a div</a>
+<form id="formID" name="register" method="post" action="register.php">
     <table>
         <tr>
             <td><label for="fname">Hello, My first name is:</label><td>
-            <td><input type="text" id="fname" class="validate[required,custom[onlyLetter],length[0,100]]" name="fname" /><td>
+            <td><input value="" class="validate[required,custom[onlyLetter],length[0,100]]" type="text" name="fname" id="fname"/><td>
         </tr>
         <tr>
             <td><label for="lname">Hello, My last name is:</label><td>

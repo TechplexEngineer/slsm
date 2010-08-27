@@ -11,12 +11,17 @@
     {
         echo "<li><a href=\"?page=manage.users\"> Users </a></li>";
     }
+    if($_SESSION['user'] != "register")
+        echo "<li><a href=\"logout.php\"> Logout </a></li>";
+    else
+        echo "<li><a href=\"logout.php\"> Exit </a></li>";
     ?>
-    <li><a href="logout.php"> Logout </a></li>
+
+    
 </ul>
 <?
-//if (!empty($_SESSION['id']) && $_SESSION['id'] >= 0 )
-//{
+if (!empty($_SESSION['user']) && $_SESSION['user'] != "register" )
+{
     $str;
     $str .= "\t\t\t<br />\n";
     $str .= "\t\t\tLogged in as: \n";
@@ -24,5 +29,5 @@
     $str .= "\t\t\t<a href=\"?page=profile\">" . $_SESSION['fullname'] . "</a>\n";
     //$str .= "\t\t\t<br />\n";
     echo $str;
-//}
+}
 ?>

@@ -3,6 +3,10 @@ if (empty($_SESSION['user'])) //check this code!!1
 {
     exit;
 }
+if(isset($_REQUEST['Submit']))
+{
+    //Let's process this form!
+}
 $sql = "SELECT * FROM `pending_profile` WHERE id ='" .$_SESSION['id']."'";
 $qry = mysql_query($sql) or die(mysql_error());
 $row = mysql_fetch_assoc($qry);
@@ -14,7 +18,7 @@ $row = mysql_fetch_assoc($qry);
 <h4>Public Profile</h4>
 <strong>NOTE:</strong> Fields left blank will not show on the website.
 <br />
-<form id="profile" name="profile" method="get" action="lib/change.php">
+<form id="profile" name="profile" method="get" action="lib/preview.php">
     <input type="hidden" value="profile" name="form">
     <table>
         <tr>

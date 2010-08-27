@@ -4,6 +4,7 @@ include "lib/config.php";
 include "lib/functions.php";
 include "lib/vars.php";
 include "lib/hours.php";
+include "lib/io.php";
 
 //This bit of code makes it so after login,
 //the user is redirected to the page that made them login
@@ -21,8 +22,13 @@ if ($myusername == "register")
     header("location:index.php?page=register");
 }
 
-if (authorized($login_table, $myusername, $mypassword))
+if (isset($myusername) && authorized($login_table, $myusername, $mypassword))
 { // authorize function defined in functions.php
+    //if($_REQUEST['page'] == "bypass")
+    //$bypassed = true;
+    if ($loginsDisabled && !$bypassed)
+        die("Sorry We can't accept any logins at this time");
+
     $_SESSION['user'] = $myusername;
     $_SESSION['pass'] = $mypassword;
 
@@ -45,7 +51,6 @@ if (authorized($login_table, $myusername, $mypassword))
 //    $_SESSION['fdollars'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 2);
 //    $_SESSION['cchours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 3);
 //    $_SESSION['bhours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 4);
-
 //$_SESSION['datatable'] = "sldb_data";
     //print_r($_SESSION);
     header("location:index.php" . $page);
@@ -57,8 +62,6 @@ if (authorized($login_table, $myusername, $mypassword))
 //        die ("Username Blank");
     //else the user has not submitted the form
 }
-if($loginsDisabled)
-    die("Sorry We can't accept any logins at this time");
 ?>
 <script src="js/jquery.js" type="text/javascript"></script>
 <script src="js/common.js" type="text/javascript"></script>
