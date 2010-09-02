@@ -8,12 +8,7 @@ echo "<h5>Welcome to your personal dashboard " . $_SESSION['fullname'] . "</h5>"
 </div>
 
 <div id="profilestats" class="widget">
-    <strong>IMPORTANT</strong><br/>
-    <ul style="padding-left: 10px;">
-        <li>You have not finished filing out your public profile <a href="?page=manage.profile">finish here</a></li>
-        <li>You are missing critical information in your personal information <a href="?page=manage.info">fix here</a></li>
-        <li>Your emergency contact information is incomplete or missing <a href="?page=manage.econtact">fill it in here</a></li>
-    </ul>
+    <?php include "lib/nagbox.php";  ?>
 </div>
 
 <div id="cal" class="widget">
@@ -28,6 +23,26 @@ if ($_SESSION['type'] == "member")
         echo "<script>";
         echo "var fullname = \"" . $_SESSION['fullname'] . "\";";
         echo "ajaxStats(fullname);";
+        echo "</script>";
+        echo "<div id=\"stats\" class=\"widget\">";
+        echo "Loading Stats...";
+        echo "<img alt=\"Loading Stats\"  src=\"img/ajax-loader.gif\"/>";
+        echo "</div>";
+    } else
+    {
+        echo "<div id=\"stats\" class=\"widget\">";
+        include "lib/dashboard.stats.php";
+        //echo"good";
+        //echo $_SESSION['fhrs'];
+        echo "</div>";
+    }
+}else if ($_SESSION['type'] == "admin")
+{
+    if (empty($_SESSION['fhrs']))
+    {
+        echo "<script>";
+        echo "var fullname = \"" . $_SESSION['fullname'] . "\";";
+        echo "ajaxStats(\"\");";
         echo "</script>";
         echo "<div id=\"stats\" class=\"widget\">";
         echo "Loading Stats...";

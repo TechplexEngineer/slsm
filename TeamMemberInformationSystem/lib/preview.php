@@ -5,12 +5,15 @@ session_start();
  * and open the template in the editor.
  */
 echo "<div class=\"widget\" style=\"width: 30%;\">";
-print_r($_REQUEST);
+echo "This part is still under development <br/> preview comming soon";
+//print_r($_REQUEST);
+
 //@todo make this prettier
+//@todo 'let me make a change'
 echo "</div>";
 
-$uprof = $_SERVER["REQUEST_URI"];
-$uprof = substr($uprof, strpos($uprof, "?"));
+$urlProf = $_SERVER["REQUEST_URI"];
+$urlProf = substr($urlProf, strpos($urlProf, "?"));
 
 //send them back to manage.profile
 ?>
@@ -20,6 +23,6 @@ $uprof = substr($uprof, strpos($uprof, "?"));
 <div class="widget" style="text-align: center;">
     <?php include "../lib/disclaimer.php"; ?>
     <br/>
-    <a href="../manage.profile.php<?php echo $uprof;?>">I Agree Submit</a>
+    <a href="../manage.profile.php<?php echo $urlProf;?>">I Agree Submit</a>
 <!--  @todo I Don't agree  -->
 </div>

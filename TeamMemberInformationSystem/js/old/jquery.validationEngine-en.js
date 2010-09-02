@@ -4,7 +4,8 @@
 	$.fn.validationEngineLanguage = function() {};
 	$.validationEngineLanguage = {
 		newLang: function() {
-			$.validationEngineLanguage.allRules = 	{"required":{    			// Add your regex rules here, you can take telephone as an example
+			$.validationEngineLanguage.allRules = 	{
+                                        "required":{    			// Add your regex rules here, you can take telephone as an example
 						"regex":"none",
 						"alertText":"* This field is required",
 						"alertTextCheckboxMultiple":"* Please select an option",
@@ -23,7 +24,13 @@
 						"alertText2":" options"},	
 					"confirm":{
 						"regex":"none",
-						"alertText":"* Your field is not matching"},		
+						"alertText":"* Your field is not matching"},
+                                      "confirmPass":{
+						"regex":"none",
+						"alertText":"* Your passwords don't match"},
+                                      "confirmEmail":{
+						"regex":"none",
+						"alertText":"* Your emails don't match"},
 					"telephone":{
 						"regex":"/^[0-9\-\(\)\ ]+$/",
 						"alertText":"* Invalid phone number"},	
@@ -31,8 +38,8 @@
 						"regex":"/^[a-zA-Z0-9_\.\-]+\@([a-zA-Z0-9\-]+\.)+[a-zA-Z0-9]{2,4}$/",
 						"alertText":"* Invalid email address"},	
 					"date":{
-                         "regex":"/^[0-9]{4}\-\[0-9]{1,2}\-\[0-9]{1,2}$/",
-                         "alertText":"* Invalid date, must be in YYYY-MM-DD format"},
+                                                "regex":"/^[0-9]{4}\-\[0-9]{1,2}\-\[0-9]{1,2}$/",
+                                                "alertText":"* Invalid date, must be in YYYY-MM-DD format"},
 					"onlyNumber":{
 						"regex":"/^[0-9\ ]+$/",
 						"alertText":"* Numbers only"},	
