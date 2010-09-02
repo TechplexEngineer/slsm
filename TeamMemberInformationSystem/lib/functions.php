@@ -208,15 +208,13 @@ function authorized($userstable, $user, $pass) {
         $myusername = mysql_real_escape_string($myusername);
         $mypassword = mysql_real_escape_string($mypassword);
 
-        $sql = "SELECT * FROM `" . $userstable . "` WHERE user='" . $myusername . "' and pass='" . $mypassword . "'";
+        $sql = "SELECT * FROM `" . $userstable . "` WHERE user='" . $myusername . "' and pass='" . sha1($mypassword) . "'";
         $result = mysql_query($sql) or die(mysql_error());
 
 // If result matched $myusername and $mypassword,
 // one row would have been returned
         if (mysql_num_rows($result) == 1) {
             return true;
-            //send the user to the page they should view upon successfull login
-            //@todo it would be nice if they could go to the page they came from.
         } else {
             return false;
         }

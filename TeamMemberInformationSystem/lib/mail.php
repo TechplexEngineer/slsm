@@ -1,17 +1,19 @@
 <?php
-include "vars.php";
+
 function timsMail($to, $subject, $body)
 {
-    $headers = "From: TIMS@team2648.com\r\n" .
+    include "vars.php";
+    $headers = "From: ".$shortname."@team2648.com\r\n" .
             "X-Mailer: php";
     return (mail($to, $subject, $body, $headers));
-//    if ()
-//    {
-//        echo("<p>Message sent!</p>");
-//    } else
-//    {
-//        echo("<p>Message delivery failed...</p>");
-//    }
+}
+
+function mailer($to, $subject, $body)
+{
+    include "vars.php";
+    $headers = "From: ".$shortname."@team2648.com\r\n" .
+            "X-Mailer: php";
+    return (mail($to, $subject, $body, $headers));
 }
 //$to = "techwiz@techwizworld.net";
 //$subject = "Your account was successfully created";

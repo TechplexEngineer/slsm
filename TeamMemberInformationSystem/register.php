@@ -17,7 +17,7 @@ if (!empty($_REQUEST['fname']))//The form has been submitted
         $error = true;
         echo ("Your passwords do not match\n<br/>");
     }
-    if(strlen($_REQUEST['pass']) >= 6 && strlen($_REQUEST['pass']) <= 20)
+    if(!(strlen($_REQUEST['pass']) >= 6 && strlen($_REQUEST['pass']) <= 20))
     {
         $error = true;
         echo ("Your password must have at least 6 characters, and no more than 20\n<br/>");
@@ -27,7 +27,8 @@ if (!empty($_REQUEST['fname']))//The form has been submitted
         $error = true;
         echo ("Your emails do not match\n<br/>");
     }
-    if(strlen($_REQUEST['email']) >= 0 && preg_match('^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$', $_REQUEST['email']))
+    //@todo Fix email validation
+    if (isset($_REQUEST['email']) && !filter_var($_REQUEST['email'], FILTER_VALIDATE_EMAIL))
     {
         $error = true;
         echo "Please enter a valid Email address";
@@ -51,7 +52,7 @@ if (!empty($_REQUEST['fname']))//The form has been submitted
     
     $usrtype = "member";
     $myusername = $_REQUEST['fname'] . "." . $_REQUEST['lname'];
-    $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`) VALUES (NULL, '" . $_REQUEST['fname'] . "', '" . $_REQUEST['lname'] . "', '" . $myusername . "', '" . $_REQUEST['pass'] . "', '" . $_REQUEST['email'] . "', '" . $usrtype . "')";
+    $sql = "INSERT INTO `" . $login_table . "` (`id`, `firstname`, `lastname`, `user`, `pass`, `email`, `type`) VALUES (NULL, '" . $_REQUEST['fname'] . "', '" . $_REQUEST['lname'] . "', '" . $myusername . "', '" . sha1($_REQUEST['pass']) . "', '" . $_REQUEST['email'] . "', '" . $usrtype . "')";
     $qry = mysql_query($sql) or die(mysql_error());
 
     $sql = "SELECT * FROM `" . $login_table . "` WHERE user='" . $myusername . "'";
@@ -69,22 +70,20 @@ if (!empty($_REQUEST['fname']))//The form has been submitted
     
     header("location:lib/success.php");
     exit;
-} else
+}
+
 
 echo "<h3>Register yourself here</h3>";
 ?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js" type="text/javascript"></script>
-<!--<script src="js/jquery.validationEngine.js" type="text/javascript"></script>-->
-<script src="js/jq.ve-en.js" type="text/javascript"></script>
+<strong> NOTE: </strong> This site's advanced features do not work in Internet Explorer. <br/>
 
-<script src="js/jq.ve.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         $("#formID").validationEngine()
     });
     //@todo Fix validation in FF
 </script>
-<a href="#" onclick="$.validationEngine.buildPrompt('#register','This is an example','error')">Build a prompt on a div</a>
+<!--<a href="#" onclick="$.validationEngine.buildPrompt('#register','This is an example','error')">Build a prompt on a div</a>-->
 <form id="formID" name="register" method="post" action="register.php">
     <table>
         <tr>
@@ -105,7 +104,7 @@ echo "<h3>Register yourself here</h3>";
         </tr>
         <tr>
             <td><label for="pass2">I am sure my password is:</label><td>
-            <td><input id="pass2" type="password" class="validate[required,confirmPass[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
+            <td><input id="pass2" type="password" class="validate[required,confirm[pass]] text-input" name="pass2"/> <!-- onblur="passMatch(this.form);"--> <td>
         </tr>
         <tr>
             <td><label for="email">My email address is:</label><td>
@@ -113,7 +112,7 @@ echo "<h3>Register yourself here</h3>";
         </tr>
         <tr>
             <td><label for="email2">I am sure my email address is:</label><td>
-            <td><input type="text" id="e2"class="validate[required,confirmEmail[e1]] text-input" name="email2" /><td>
+            <td><input type="text" id="e2"class="validate[required,confirm[e1]] text-input" name="email2" /><td>
         </tr>
     </table>
 <?php include "lib/disclaimer.php"; ?>

@@ -4,12 +4,13 @@ $login_table = "tims_users";
 //$textures_table = "otms_textures";
 
 $version = "v1.5";
-$shortname = "OPIS";
+$shortname = "OTIS";
 $title = $shortname ." ". $version;
-$sysname = "Online Personnel Information System";
+$sysname = "Online Team Information System";
 $purpose ="A Web Database Application for Team Profile Management";
 $year = "2010";
-$sysurl = "Team2648.com"."/".$shortname;
+$sysurl = "team2648.com"."/".$shortname;
+$for = "for Infinite Loop Robotics";
 
 $salt = "26548teamILR";
 

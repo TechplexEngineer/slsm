@@ -4,14 +4,14 @@ session_start();
 if (empty($_SESSION['user']))
     header("location:login.php?page=" . $_GET['page']);
 
-if ($_SESSION['user'] == "register")
-    $page = "register";
-else if ($_GET['page'] == "register")
-{
-    $page = "";
-    $_GET['page'] = "";
-    header("location: ./");
-} else
+//if ($_SESSION['user'] == "register")
+//    $page = "register";
+//else if ($_GET['page'] == "register")
+//{
+//    $page = "";
+//    $_GET['page'] = "";
+//    header("location: ./");
+//} else
     $page = $_REQUEST['page'];
 
 include "lib/config.php";
@@ -33,8 +33,11 @@ include "lib/hours.php";
         <link href="css/styling.css" rel="stylesheet" type="text/css" media="screen" />
 
         <!--Validation-->
-        <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
+
         <script src="js/jquery.js" type="text/javascript"></script>
+        <script src="js/jquery.validationEngine-en.js" type="text/javascript"></script>
+        <script src="js/jquery.validationEngine.js" type="text/javascript"></script><link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css" media="screen" charset="utf-8" />
+
 
         <script src="js/common.js" type="text/javascript"></script>
 
@@ -77,10 +80,11 @@ include "lib/hours.php";
 
                         <?php
                         include "lib/io.php";
-
-
                         if (empty($page))
-                            include "parts/dashboard.php";
+                            if($_SESSION['user'] != "register")
+                                include "parts/dashboard.php";
+                            else
+                                echo "I'm Sorry Something went wrong.";
                         elseif (file_exists($page . ".php"))
                             include $page . ".php";
                         elseif (file_exists($page))

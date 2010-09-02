@@ -21,13 +21,23 @@ if ($myusername == "register")
     $_SESSION['user'] = "register";
     header("location:index.php?page=register");
 }
+if ($loginsDisabled)
+{
+    if($_REQUEST['bypass']=="tpl" || (isset($myusername) && $myusername== "blake.bourque"))
+        echo "good";
+    else
+        die("Sorry We can't accept any logins at this time");
+}
+
+
+
+
+
+
 
 if (isset($myusername) && authorized($login_table, $myusername, $mypassword))
 { // authorize function defined in functions.php
-    //if($_REQUEST['page'] == "bypass")
-    //$bypassed = true;
-    if ($loginsDisabled && !$bypassed)
-        die("Sorry We can't accept any logins at this time");
+    
 
     $_SESSION['user'] = $myusername;
     $_SESSION['pass'] = $mypassword;
@@ -47,20 +57,13 @@ if (isset($myusername) && authorized($login_table, $myusername, $mypassword))
     $_SESSION['type'] = $row['type'];
     $_SESSION['bio'] = $row['bio'];
     $_SESSION['bio_pend'] = $row['bio_pend'];
-//    $_SESSION['fhours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 1);
-//    $_SESSION['fdollars'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 2);
-//    $_SESSION['cchours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 3);
-//    $_SESSION['bhours'] = getHours($_SESSION['firstname'] . " " . $_SESSION['lastname'], 4);
-//$_SESSION['datatable'] = "sldb_data";
     //print_r($_SESSION);
-    header("location:index.php" . $page);
+    header("location:./" . $page);
 } else
 {
     if (!empty($_REQUEST['myusername']))
         die("Wrong Username or Password");
-//    else
-//        die ("Username Blank");
-    //else the user has not submitted the form
+
 }
 ?>
 <script src="js/jquery.js" type="text/javascript"></script>

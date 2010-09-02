@@ -6,7 +6,7 @@ if (empty($_SESSION['user']) && empty($_REQUEST['form'])) //check this code!!1
 }
 if (isset($_REQUEST['Submit']))
 {
-    echo "Let's process this form!";
+    //echo "Let's process this form!";
     include "lib/config.php";
     include "lib/mail.php";
     if ($_REQUEST['form'] == "profile")
@@ -16,7 +16,7 @@ if (isset($_REQUEST['Submit']))
         $sql = "INSERT INTO `tims`.`pending_profile`"
                 . "(`id`, `nickname`, `location`, `role`, `yog`, `interests`, `favMoment`, `gainThisYr`, `futurePlans`, `bio`) \n"
                 . "VALUES ('" . $_SESSION['id'] . "', '" . $_REQUEST['nickname'] . "', '" . $_REQUEST['town'] . "', '" . $_REQUEST['role'] . "', '" . $_REQUEST['yog'] . "', '" . $_REQUEST['interests'] . "', '" . $_REQUEST['fav_moment'] . "', '" . $_REQUEST['gain'] . "', '" . $_REQUEST['future'] . "', '" . $_REQUEST['bio'] . "')\n"
-                . "ON DUPLICATE KEY UPDATE nickname ='" . $_REQUEST['nickname'] . "', location='" . $_REQUEST['town'] . "', role= '" . $_REQUEST['role'] . "', yog='" . $_REQUEST['yog'] . "1" . "', interests='" . $_REQUEST['interests'] . "', favMoment='" . $_REQUEST['fav_moment'] . "', gainThisYr='" . $_REQUEST['gain'] . "', futurePlans='" . $_REQUEST['future'] . "', bio='" . $_REQUEST['bio'] . "'\n";
+                . "ON DUPLICATE KEY UPDATE nickname ='" . $_REQUEST['nickname'] . "', location='" . $_REQUEST['town'] . "', role= '" . $_REQUEST['role'] . "', yog='" . $_REQUEST['yog'] . "', interests='" . $_REQUEST['interests'] . "', favMoment='" . $_REQUEST['fav_moment'] . "', gainThisYr='" . $_REQUEST['gain'] . "', futurePlans='" . $_REQUEST['future'] . "', bio='" . $_REQUEST['bio'] . "'\n";
         $qry = mysql_query($sql) or die(mysql_error());
 
 //@todo overlay this
@@ -24,13 +24,17 @@ if (isset($_REQUEST['Submit']))
         //send mail to moderators
         include "lib/vars.php";
         $to = $captMail;
-
+        $prof = implode("\n", $_REQUEST);
         $subject = "Moderation Needed";
         $body = $_SESSION['fullname'] . " Has just changed their public profile.\n" .
                 "Please login here to moderate their changes:\n" .
-                $sysurl . "?cmd=moderate\n" .
-                "Best," .
-                "Blake";
+                //"http://team2648.com/OPIS/login.php?page=manage".
+                "http://www." . $sysurl . "/login.php?page=manage\n" .
+                "Best,\n" .
+                "Blake\n\n\n" .
+                "Click here to accept the profile bleow\n\n" .
+                "http://www." . $sysurl . "/login.php?page=manage&acceptID=".$_SESSION['id']."\n" .
+                $prof;
         timsMail($to, $subject, $body);
         $to = $mentorMail;
         timsMail($to, $subject, $body);
@@ -50,7 +54,7 @@ $row = mysql_fetch_assoc($qry);
 ?>
 <!--<h3>Use this page to manage your profile information</h3>-->
 <h4>Public Profile</h4>
-<strong>NOTE:</strong> Fields left blank will not show on the website.
+<strong>NOTE:</strong> Fields filled with [NONE] will not show on the website.
 <br />
 <form id="profile" name="profile" method="get" action="lib/preview.php">
     <input type="hidden" value="profile" name="form">
@@ -97,8 +101,11 @@ $row = mysql_fetch_assoc($qry);
             <td><textarea name="bio" ><?php echo $row['bio']; ?></textarea><td>
         </tr>
     </table>
-
-<?php include "lib/disclaimer.php"; ?>
+    * All fields are required.
+<?php
+include "lib/disclaimer.php";
+// @todo add js validation of all fields filled in
+?>
     <br><input type="submit" name="Submit" value=" I Agree, Preview "/>
 
 </form>
