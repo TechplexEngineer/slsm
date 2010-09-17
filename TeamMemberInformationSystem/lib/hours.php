@@ -4,8 +4,12 @@ function getCol($name)
 {
     $r=1;
     $c=2;
-    while(getCell($r,$c,1) != $name)
+    while(getCell($r,$c,1) != $name )
     {
+        if(c <= 50)
+            {
+            return "error";
+        }
         $c++;
         //echo $c;
     }
