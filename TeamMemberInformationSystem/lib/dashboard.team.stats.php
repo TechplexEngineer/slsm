@@ -11,6 +11,11 @@ if (!empty($_GET['name']))
         include "hours.php";
         // GetCollumn of which C#R1 = users name
         $col = getCol($_GET['name']);
+
+        //if($col == "error")
+            //die("Missing");
+            //
+            exit;
         //die ($col);
         // then get cell from each of the sheets for that user,
         // assuming they are in the same column of each sheet

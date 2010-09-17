@@ -11,7 +11,13 @@ if (!empty($_GET['name']))
         include "hours.php";
         // GetCollumn of which C#R1 = users name
         $col = getCol($_GET['name']);
-        //die ($col);
+
+        if($col == "error")
+            die("User Missing From Database");
+            //@todo sned message to blake
+            //@todo account approval
+
+
         // then get cell from each of the sheets for that user,
         // assuming they are in the same column of each sheet
         $s1 = getcell(3, $col, 1);
