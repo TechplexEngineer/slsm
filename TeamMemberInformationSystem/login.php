@@ -13,6 +13,9 @@ if (empty($_REQUEST['page']))
 else
     $page = "?page=" . $_REQUEST['page'];
 
+if (isset($_REQUEST['acceptID']))
+    $page = $page . "&acceptID=" . $_REQUEST['acceptID'];
+
 $myusername = $_REQUEST['myusername'];
 $mypassword = $_REQUEST['mypassword'];
 
