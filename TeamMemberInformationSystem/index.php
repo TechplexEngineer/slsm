@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ob_start("ob_gzhandler");
 if (empty($_SESSION['user']))
     header("location:login.php?page=" . $_GET['page']);
 

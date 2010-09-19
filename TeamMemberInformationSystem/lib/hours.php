@@ -2,15 +2,17 @@
 
 function getCol($name)
 {
-    $r=1;
-    $c=2;
-    while(getCell($r,$c,1) != $name )
+    $r = 1;
+    $c = 2;
+    $cellVal = getCell($r, $c, 1);
+    while ($cellVal != $name)
     {
-        if(c <= 50)
-            {
+        if (empty($cellVal))
+        {
             return "error";
         }
         $c++;
+        $cellVal = getCell($r, $c, 1);
         //echo $c;
     }
     return $c;
@@ -24,7 +26,7 @@ function getCell($r, $c, $sheet)
     $vis = "public/";
     $proj = "basic/";
 //$cell = "R3C2";
-    $cell = "R".$r."C".$c;
+    $cell = "R" . $r . "C" . $c;
 
     $url = $baseurl . $spreadsheet . $sheetID . $vis . $proj . $cell . "";
 
@@ -41,14 +43,14 @@ function getCell($r, $c, $sheet)
     $data = substr($xmlWOurl, $posZ + 1);
 
     //if the result has more than ten characters then something went wrong
-    if(strlen($data) > 10) 
+    if (strlen($data) > 10)
     {
         //Asuming we have xml 
-        $datapos = strrpos($xml,"<content type='text'>");
+        $datapos = strrpos($xml, "<content type='text'>");
         $datapos += 21;
         $datawj = substr($xml, $datapos);
-        $endcont = strpos($datawj,"</content>");
-        return substr($datawj, 0,$endcont);
+        $endcont = strpos($datawj, "</content>");
+        return substr($datawj, 0, $endcont);
     }
     else
         return $data;
@@ -62,14 +64,13 @@ function getHours($name, $sheet)
     $count = 0;
     //echo $curCell;
 
-    while ($count < 25 )
+    while ($count < 25)
     {
         //echo "'".$curCell. "' " .$name." ".$count." ".empty($curCell). "<br/>\n";
-        $count ++;
+        $count++;
         if ($curCell === $name)
         {
             return getCell("R" . "3" . "C" . $c, $sheet); //This is the value of the cell
-
         } else
         {
             $c++;
@@ -78,4 +79,5 @@ function getHours($name, $sheet)
     }
     return "not found";
 }
+
 ?>
