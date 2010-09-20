@@ -24,7 +24,7 @@ if (isset($_REQUEST['acceptID']))
     //@todo preview
     //exit;
 }
-include "lib/vars.php";
+include "vars.php";
 $sql = "SELECT * FROM `pending_profile`";
 $qry = mysql_query($sql) or die(mysql_error());
 if (mysql_num_rows($qry) == 1)

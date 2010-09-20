@@ -14,9 +14,9 @@ if (empty($_SESSION['user']))
 //} else
     $page = $_REQUEST['page'];
 
-include "lib/config.php";
-include "lib/vars.php";
-include "lib/hours.php";
+include "config.php";
+include "vars.php";
+include "hours.php";
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -79,16 +79,16 @@ include "lib/hours.php";
                     <div class="content-in">
 
                         <?php
-                        include "lib/io.php";
+                        include "lib/functions/io.php";
                         if (empty($page))
                             if($_SESSION['user'] != "register")
                                 include "parts/dashboard.php";
                             else
                                 echo "I'm Sorry Something went wrong.";
-                        elseif (file_exists($page . ".php"))
-                            include $page . ".php";
-                        elseif (file_exists($page))
-                            include $page;
+                        elseif (file_exists("pages/".$page . ".php"))
+                            include "pages/".$page . ".php";
+                        elseif ("pages/".file_exists($page))
+                            include "pages/".$page;
                         else
                             echo"ERROR 404: file '" . $page . "' could not be found <br/><br/><br/><br/><br/><br/><br/><br/>";
                         ?>

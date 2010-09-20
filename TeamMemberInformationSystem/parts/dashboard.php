@@ -8,7 +8,7 @@ echo "<h5>Welcome to your personal dashboard " . $_SESSION['fullname'] . "</h5>"
 </div>
 
 <div id="profilestats" class="widget">
-    <?php include "lib/nagbox.php";  ?>
+    <?php include "nagbox.php";  ?>
 </div>
 
 <div id="cal" class="widget">
@@ -31,34 +31,21 @@ if ($_SESSION['type'] == "member")
     } else
     {
         echo "<div id=\"stats\" class=\"widget\">";
-        include "lib/dashboard.stats.php";
+        include "dashboard.stats.php";
         //echo"good";
         //echo $_SESSION['fhrs'];
         echo "</div>";
     }
 }else if ($_SESSION['type'] == "admin")
 {
-    if (empty($_SESSION['fhrs']))
-    {
-        echo "<script>";
-        echo "var fullname = \"" . $_SESSION['fullname'] . "\";";
-        echo "ajaxStats(\"\");";
-        echo "</script>";
-        echo "<div id=\"stats\" class=\"widget\">";
-        echo "Loading Stats...";
-        echo "<img alt=\"Loading Stats\"  src=\"img/ajax-loader.gif\"/>";
-        echo "</div>";
-    } else
-    {
-        echo "<div id=\"stats\" class=\"widget\">";
-        include "lib/dashboard.stats.php";
-        //echo"good";
-        //echo $_SESSION['fhrs'];
-        echo "</div>";
-    }
+    //echo "<div id=\"stats\" class=\"widget\">";
+    //echo "Loading Stats...";
+    //echo "<img alt=\"Loading Stats\"  src=\"img/ajax-loader.gif\"/>";
+    //echo "</div>";
 }
 
 if ($_SESSION['id'] == "1") // It it blake?
+
 {
     echo "<div id=\"logins\" class=\"widget\">";
     echo "<form name=\"controlsForm\">";

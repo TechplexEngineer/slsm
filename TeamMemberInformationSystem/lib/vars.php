@@ -21,4 +21,10 @@ $loginsDisabled = false;
 $registrationDisabled = false;
 global $bypassed;
 $bypassed = false;
+
+$ssid = "0AnhvV5acDaAvdGVrdmFpWkpNbnVYdXZUeFRwSHE0SkE";
+
+//0AnhvV5acDaAvdDRvVmk1bi02WmJBeUtBak5xMmFTNEE (old)
+//0AnhvV5acDaAvdGVrdmFpWkpNbnVYdXZUeFRwSHE0SkE
+//0AnhvV5acDaAvdGVrdmFpWkpNbnVYdXZUeFRwSHE0SkE
 ?>

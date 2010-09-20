@@ -7,8 +7,8 @@ if (empty($_SESSION['user']) && empty($_REQUEST['form'])) //check this code!!1
 if (isset($_REQUEST['Submit']))
 {
     //echo "Let's process this form!";
-    include "lib/config.php";
-    include "lib/mail.php";
+    include "config.php";
+    include "mail.php";
     if ($_REQUEST['form'] == "profile")
     {//public profile
         //print_r($_REQUEST);
@@ -22,7 +22,7 @@ if (isset($_REQUEST['Submit']))
 //@todo overlay this
 //http://flowplayer.org/tools/overlay/index.html
         //send mail to moderators
-        include "lib/vars.php";
+        include "vars.php";
         $to = $captMail;
         $prof = implode("\n", $_REQUEST);
         $subject = "Moderation Needed";
@@ -43,7 +43,7 @@ if (isset($_REQUEST['Submit']))
         echo "<div class =\"widget\" style=\"width:350px\">";
         echo "Your changes have been saved, they will not go live until reviewed by a moderator";
         echo "<br>";
-        echo "<a href=\"./\">Click here to continue</a>";
+        echo "<a href=\"../\">Click here to continue</a>";
         echo "</div>";
     }
     exit;
@@ -103,7 +103,7 @@ $row = mysql_fetch_assoc($qry);
     </table>
     * All fields are required.
 <?php
-include "lib/disclaimer.php";
+include "disclaimer.php";
 // @todo add js validation of all fields filled in
 ?>
     <br><input type="submit" name="Submit" value=" I Agree, Preview "/>

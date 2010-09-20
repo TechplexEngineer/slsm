@@ -1,8 +1,8 @@
 <?php
 
 //print_r($_REQUEST);
-include "./vars.php";
-include "./config.php";
+include "vars.php";
+include "config.php";
 
 if ($_REQUEST['name'] == "cblogin")
 {

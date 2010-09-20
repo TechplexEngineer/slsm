@@ -18,10 +18,30 @@ function getCol($name)
     return $c;
 }
 
+function getRow($name)
+{
+    $r=2;
+    $c=1;
+    $cellVal = getCell($r,$c,1);
+    while ($cellVal != $name)
+    {
+        if (empty($cellVal))
+        {
+            return "error";
+        }
+        $r++;
+        $cellVal = getCell($r, $c, 1);
+        //echo $c;
+    }
+    return $r;
+    
+}
+
 function getCell($r, $c, $sheet)
 {
+    include "vars.php";
     $baseurl = "http://spreadsheets.google.com/feeds/cells/";
-    $spreadsheet = "0AnhvV5acDaAvdDRvVmk1bi02WmJBeUtBak5xMmFTNEE/";
+    $spreadsheet = $ssid . "/";
     $sheetID = $sheet . "/";
     $vis = "public/";
     $proj = "basic/";
