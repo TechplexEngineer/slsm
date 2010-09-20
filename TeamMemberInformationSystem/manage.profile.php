@@ -35,9 +35,9 @@ if (isset($_REQUEST['Submit']))
                 "Click here to accept the profile bleow\n\n" .
                 "http://www." . $sysurl . "/login.php?page=manage&acceptID=".$_SESSION['id']."\n" .
                 $prof;
-        timsMail($to, $subject, $body);
+        mailer($to, $subject, $body);
         $to = $mentorMail;
-        timsMail($to, $subject, $body);
+        mailer($to, $subject, $body);
 
         echo "<link href=\"../css/styling.css\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\" />";
         echo "<div class =\"widget\" style=\"width:350px\">";

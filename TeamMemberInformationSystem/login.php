@@ -1,10 +1,10 @@
 <?php
 session_start();
 include "lib/config.php";
-include "lib/functions.php";
+include "lib/functions/functions.php";
 include "lib/vars.php";
 include "lib/hours.php";
-include "lib/io.php";
+include "lib/functions/io.php";
 
 //This bit of code makes it so after login,
 //the user is redirected to the page that made them login
