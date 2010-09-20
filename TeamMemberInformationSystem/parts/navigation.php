@@ -1,7 +1,9 @@
 <ul>
+    <li> Me </li>
+    <ul>
     <?php
-    include "./lib/io.php";
-    include "./lib/vars.php";
+    include "io.php";
+    include "vars.php";
     if ($_SESSION['user'] != "register")
     {
         echo "<li><a href=\"./\"> Dashboard </a></li>";
@@ -9,11 +11,9 @@
         echo "<li><a href=\"?page=manage.info\"> My Info</a></li>";
         echo "<li><a href=\"?page=manage.econtact\"> E Contact</a></li>";
     }
-    if ($_SESSION['type'] == "superuser" || $_SESSION['type'] == "admin" )
-    {
-        echo "<li><a href=\"?page=manage.users\"> Users </a></li>";
-        echo "<li><a href=\"?page=email\"> Email </a></li>";
-    }
+    echo "</ul>";
+    
+    include "admin/nav.php";
     if (!($_REQUEST['page'] == "parts/bugs.php" || $_REQUEST['page'] == "register" || $_REQUEST['user'] == "register"))
         echo "<li><a href=\"?page=parts/bugs.php&referrer=" . $_SERVER['REQUEST_URI'] . "\"> Report a Bug </a></li>";
 

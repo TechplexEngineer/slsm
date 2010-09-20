@@ -10,8 +10,8 @@ if (isset($_REQUEST['Submit']))
     //echo "Let's process this form!\n";
 
     //die(print_r($_REQUEST));
-    include "lib/config.php";
-    include "lib/mail.php";
+    include "config.php";
+    include "mail.php";
     if ($_REQUEST['form'] == "econtact")
     {//Personal Infos
         //"UPDATE `tims`.`pending_profile` SET `nickname` = 'I Don''t Have One' WHERE `pending_profile`.`id` = 1;";
@@ -39,7 +39,7 @@ if (isset($_REQUEST['Submit']))
         echo "<div class =\"widget\" style=\"width:350px\">";
         echo "Your changes have been saved";
         echo "<br>";
-        echo "<a href=\"./\">Click here to continue</a>";
+        echo "<a href=\"../\">Click here to continue</a>";
         echo "</div>";
     }
     exit;
@@ -54,7 +54,7 @@ $row = mysql_fetch_assoc($qry);
 <h4>Emergency Contact</h4>
 <strong>NOTE:</strong> None of the information provided in this form is accessible to the public.
 <br />
-<form id="profile" name="profile" method="get" action="manage.econtact.php">
+<form id="profile" name="profile" method="get" action="pages/manage.econtact.php">
     <input type="hidden" name="form" value="econtact" >
     <table>
         <tr>
@@ -112,7 +112,7 @@ $row = mysql_fetch_assoc($qry);
         </tr>
     </table>
 
-    <?php include "lib/disclaimer.php"; ?>
+    <?php include "disclaimer.php"; ?>
     <br><input type="submit" name="Submit" value=" I Agree, Submit ">
 
 </form>

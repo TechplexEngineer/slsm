@@ -1,0 +1,1 @@
+php_value include_path ".:/var/www/team2648/OTIS/ZendGdata-1.10.7/library"

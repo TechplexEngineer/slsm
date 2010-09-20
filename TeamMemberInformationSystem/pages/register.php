@@ -1,9 +1,9 @@
 <?php
 session_start();
-include "lib/config.php";
-include "lib/vars.php";
-include "lib/mail.php";
-include "lib/io.php";
+include "config.php";
+include "vars.php";
+include "mail.php";
+include "io.php";
 
 if($registrationDisabled)
     die("I'm Sorry we are not acepting new registrations.");
@@ -115,6 +115,6 @@ echo "<h3>Register yourself here</h3>";
             <td><input type="text" id="e2"class="validate[required,confirm[e1]] text-input" name="email2" /><td>
         </tr>
     </table>
-<?php include "lib/disclaimer.php"; ?>
+<?php include "disclaimer.php"; ?>
     <br><input type="submit" id="submit" name="Submit" value="I Agree, Create My account">
 </form>

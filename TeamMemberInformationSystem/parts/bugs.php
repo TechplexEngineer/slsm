@@ -3,7 +3,7 @@ session_start();
 
 if(isset($_REQUEST['Submit']))
 {
-    include "./lib/mail.php";
+    include "mail.php";
     $body = "From: " . $_REQUEST['myname'] . "\n".
     "On: " . $_REQUEST['time'] . "\n".
     "At: " . $_REQUEST['errorPage'] . "\n".

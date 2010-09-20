@@ -10,20 +10,20 @@ if (!empty($_GET['name']))
         //die ($col);
         include "hours.php";
         // GetCollumn of which C#R1 = users name
-        $col = getCol($_GET['name']);
-
-        if($col == "error")
+        $row = getRow($_GET['name']);
+        //die($row);
+        if($row == "error")
             die("User Missing From Database");
             //@todo sned message to blake
             //@todo account approval
-
+            //die("robert");
 
         // then get cell from each of the sheets for that user,
         // assuming they are in the same column of each sheet
-        $s1 = getcell(3, $col, 1);
-        $s2 = getcell(3, $col, 2);
-        $s3 = getcell(3, $col, 3);
-        $s4 = getcell(3, $col, 4);
+        $s1 = getcell($row, 2, 1);
+        $s2 = getcell($row, 2, 2);
+        $s3 = getcell($row, 2, 3);
+        $s4 = getcell($row, 2, 4);
         // Store my loot in the session varibles,
         // so next time I want this, I don't need to fetch it
         $_SESSION['fhrs'] = $s1;

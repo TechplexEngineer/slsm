@@ -21,8 +21,8 @@ $urlProf = substr($urlProf, strpos($urlProf, "?"));
 <link href="../css/styling.css" rel="stylesheet" type="text/css" media="screen" />
 
 <div class="widget" style="text-align: center;">
-    <?php include "../lib/disclaimer.php"; ?>
+    <?php include "disclaimer.php"; ?>
     <br/>
-    <a href="../manage.profile.php<?php echo $urlProf;?>">I Agree Submit</a>
+    <a href="../pages/manage.profile.php<?php echo $urlProf;?>">I Agree Submit</a>
 <!--  @todo I Don't agree  -->
 </div>

@@ -70,7 +70,7 @@ function ajaxStats(fullname)
 {
     //console.log("sjaxStats");
     $.ajax({
-        url: "lib/dashboard.stats.php?name="+fullname,
+        url: "lib/widgets/dashboard.stats.php?name="+fullname,
         cache: false,
         success: function(html){
             //            console.log(html);
